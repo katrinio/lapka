@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>echo_.log</title>
-        <link rel="stylesheet" href="/static/styles.css">
+        <link rel="stylesheet" href="/static/css/base.css">
+        <link rel="stylesheet" href="/static/css/timeline.css">
+        <link rel="stylesheet" href="/static/css/terminal.css">
     </head>
     <body>
         <main>
@@ -27,6 +29,21 @@
                     </div>
                 {% endfor %}
             </section>
+            <div class="terminal-bar">
+                <label class="terminal-row" for="terminal-command">
+                    <span class="terminal-prompt">echo_ &gt;</span>
+                    <input
+                        id="terminal-command"
+                        class="terminal-input"
+                        type="text"
+                        name="command"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        autocorrect="off"
+                        spellcheck="false"
+                    >
+                </label>
+            </div>
         </main>
     </body>
 </html>
