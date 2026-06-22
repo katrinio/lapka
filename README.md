@@ -53,8 +53,16 @@ Something that would make it into a New Year’s recap.
 - Jinja2
 - SQLite
 - HTMX
+- Alembic
 
 
 - No frontend build step.
 - No SPA.
 - No JavaScript framework.
+
+## Migrations
+
+```bash
+.venv/bin/alembic revision --autogenerate -m "initial"
+.venv/bin/alembic upgrade head
+```

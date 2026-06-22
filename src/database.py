@@ -1,4 +1,6 @@
-from sqlmodel import SQLModel, Session, create_engine
+from sqlmodel import Session, create_engine
+
+from src.models import Base
 
 DATABASE_URL = "sqlite:///echo.db"
 
@@ -9,7 +11,7 @@ engine = create_engine(
 
 
 def create_db_and_tables() -> None:
-    SQLModel.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
 
 
 def get_session() -> Session:
