@@ -1,49 +1,25 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>echo_.log</title>
-        <link rel="stylesheet" href="/static/css/base.css">
-        <link rel="stylesheet" href="/static/css/timeline.css">
-        <link rel="stylesheet" href="/static/css/terminal.css">
-    </head>
-    <body>
-        <main>
-            <header>
-                <div class="prompt">katrin@echo_:~$ timeline</div>
-                <p>
-                    <a class="new-link" href="/new">+ New milestone</a>
-                </p>
-            </header>
-            <section class="list">
-                {% for day, milestones in grouped_milestones.items() %}
-                    <div class="day-group">
-                        <div class="date">{{ day }}</div>
-                        {% for milestone in milestones %}
-                            <a class="item tree-item" href="/milestones/{{ milestone.slug }}">
-                                <span class="tree-branch">{% if loop.last %}└─{% else %}├─{% endif %}</span>
-                                <span class="slug">{{ milestone.slug }}</span>
-                            </a>
-                        {% endfor %}
-                    </div>
+{% extends "base.html" %}
+
+{% block title %}echo_.log{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="prompt">katrin@echo_:~$ timeline</div>
+        <p>
+            <a class="new-link" href="/new">+ New milestone</a>
+        </p>
+    </header>
+    <section class="list">
+        {% for day, milestones in grouped_milestones.items() %}
+            <div class="day-group">
+                <div class="date">{{ day }}</div>
+                {% for milestone in milestones %}
+                    <a class="item tree-item" href="/milestones/{{ milestone.slug }}">
+                        <span class="tree-branch">{% if loop.last %}└─{% else %}├─{% endif %}</span>
+                        <span class="slug">{{ milestone.slug }}</span>
+                    </a>
                 {% endfor %}
-            </section>
-            <div class="terminal-bar">
-                <label class="terminal-row" for="terminal-command">
-                    <span class="terminal-prompt">echo_ &gt;</span>
-                    <input
-                        id="terminal-command"
-                        class="terminal-input"
-                        type="text"
-                        name="command"
-                        autocomplete="off"
-                        autocapitalize="off"
-                        autocorrect="off"
-                        spellcheck="false"
-                    >
-                </label>
             </div>
-        </main>
-    </body>
-</html>
+        {% endfor %}
+    </section>
+{% endblock %}
