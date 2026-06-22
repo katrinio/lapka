@@ -1,6 +1,7 @@
-from sqlmodel import Session, create_engine
+from collections.abc import Generator
 
-from src.models import Base
+from sqlalchemy import create_engine
+from sqlmodel import Session
 
 DATABASE_URL = "sqlite:///echo.db"
 
@@ -10,9 +11,6 @@ engine = create_engine(
 )
 
 
-def create_db_and_tables() -> None:
-    Base.metadata.create_all(engine)
-
-
-def get_session() -> Session:
-    return Session(engine)
+def get_session() -> Generator[Session, None, None]:
+    with Session(engine) as session:
+        yield session
