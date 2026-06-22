@@ -3,26 +3,28 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>lapka.log</title>
+        <title>echo_.log</title>
         <link rel="stylesheet" href="/static/styles.css">
     </head>
     <body>
         <main>
             <header>
-                <div class="prompt">katrin@lapka:~$ timeline</div>
+                <div class="prompt">katrin@echo_:~$ timeline</div>
                 <p>
                     <a class="new-link" href="/new">+ New milestone</a>
                 </p>
             </header>
             <section class="list">
-                {% for milestone in milestones %}
-                    <a class="item" href="/milestones/{{ milestone.slug }}">
-                        <span class="dot">○</span>
-                        <span>
-                            <span class="title">{{ milestone.title }}</span>
-                            <span class="date">{{ milestone.date }}</span>
-                        </span>
-                    </a>
+                {% for day, milestones in grouped_milestones.items() %}
+                    <div class="day-group">
+                        <div class="date">{{ day }}</div>
+                        {% for milestone in milestones %}
+                            <a class="item tree-item" href="/milestones/{{ milestone.slug }}">
+                                <span class="tree-branch">{% if loop.last %}└─{% else %}├─{% endif %}</span>
+                                <span class="slug">{{ milestone.slug }}</span>
+                            </a>
+                        {% endfor %}
+                    </div>
                 {% endfor %}
             </section>
         </main>

@@ -1,8 +1,10 @@
+from collections import OrderedDict
+
 from fastapi import FastAPI, Request
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from fastapi import Form
 from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 
@@ -31,12 +33,26 @@ milestones = [
 ]
 
 
+def group_milestones_by_day(
+    items: list[dict[str, str]],
+) -> OrderedDict[str, list[dict[str, str]]]:
+    grouped: dict[str, list[dict[str, str]]] = {}
+    for milestone in items:
+        day = milestone["date"]
+        grouped.setdefault(day, []).append(milestone)
+
+    return OrderedDict(
+        sorted(grouped.items(), key=lambda item: item[0], reverse=True),
+    )
+
+
 @app.get("/")
 def index(request: Request):
+    grouped_milestones = group_milestones_by_day(milestones)
     return templates.TemplateResponse(
         request,
         "index.html",
-        {"milestones": milestones},
+        {"grouped_milestones": grouped_milestones},
     )
 
 

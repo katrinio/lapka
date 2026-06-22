@@ -37,11 +37,14 @@ main {
 }
 
 .item {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.list .item {
   display: grid;
   grid-template-columns: 24px 1fr;
   gap: 8px;
-  color: var(--text);
-  text-decoration: none;
 }
 
 .item:active,
@@ -56,6 +59,29 @@ main {
 .date {
   display: block;
   color: var(--muted);
+}
+
+.day-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day-group .date {
+  margin-bottom: 2px;
+}
+
+.tree-item {
+  grid-template-columns: 3ch 1fr;
+  padding-left: 2px;
+}
+
+.tree-branch {
+  color: var(--muted);
+}
+
+.slug {
+  color: var(--text);
 }
 
 .dot {
