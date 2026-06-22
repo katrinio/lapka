@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% block title %}echo_.log{% endblock %}
-
 {% block content %}
     <header>
         <div class="prompt">katrin@echo_:~$ timeline</div>
@@ -15,7 +13,13 @@
                 <div class="date">{{ day }}</div>
                 {% for milestone in milestones %}
                     <a class="item tree-item" href="/milestones/{{ milestone.slug }}">
-                        <span class="tree-branch">{% if loop.last %}└─{% else %}├─{% endif %}</span>
+                        <span class="tree-branch">
+                            {% if loop.last %}
+                                └─
+                            {% else %}
+                                ├─
+                            {% endif %}
+                        </span>
                         <span class="slug">{{ milestone.slug }}</span>
                     </a>
                 {% endfor %}
