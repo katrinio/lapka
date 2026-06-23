@@ -1,7 +1,6 @@
 from pathlib import Path
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
 
 ROOT = Path(__file__).parent.parent
 DATABASE_URL = f"sqlite:///{ROOT / 'echo.db'}"
