@@ -14,11 +14,11 @@ repos:
         types: [python]
         pass_filenames: false
 
-#      - id: djlint
-#        name: djLint
-#        entry: poetry run djlint --check
-#        language: system
-#        files: ^src/templates/.*\.html$
+      - id: djlint
+        name: djLint
+        entry: poetry run djlint --check
+        language: system
+        files: ^src/templates/.*\.html$
 
       - id: pytest
         name: Pytest
