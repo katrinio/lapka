@@ -1,10 +1,15 @@
-from __future__ import annotations
+
+
+from typing import TYPE_CHECKING
 
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.orm.base import Base
 from src.orm.milestone_tags import milestone_tags
+
+if TYPE_CHECKING:
+    from src.orm.milestone import Milestone
 
 
 class Tag(Base):
