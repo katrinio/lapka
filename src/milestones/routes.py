@@ -9,7 +9,7 @@ from fastapi.templating import Jinja2Templates
 from pydantic import ValidationError
 
 from src.milestones.dto import MilestoneCreateDTO, MilestoneUpdateDTO
-from orm.milestone import Milestone
+from src.orm.milestone import Milestone
 
 router = APIRouter()
 templates = Jinja2Templates(directory=Path(__file__).parent.parent / "templates")
