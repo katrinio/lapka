@@ -41,4 +41,4 @@ class MilestoneCreateDTO(BaseModel):
 
 
 class MilestoneUpdateDTO(MilestoneCreateDTO):
-    pass
+    tags: str = ""
