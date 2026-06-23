@@ -1,0 +1,35 @@
+.terminal-bar {
+  margin-top: 28px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.terminal-bar .terminal-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  flex-direction: row;
+}
+
+.terminal-prompt {
+  color: var(--accent);
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.terminal-input {
+  flex: 1 1 auto;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--text);
+  font: inherit;
+  padding: 0;
+  min-width: 0;
+}
+
+.terminal-input::placeholder {
+  color: var(--muted);
+}
