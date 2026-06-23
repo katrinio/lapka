@@ -1,15 +1,16 @@
+from __future__ import annotations
+
 from datetime import UTC, date, datetime
 from typing import Sequence
 
 from sqlalchemy import Date, DateTime, String, select
-from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
+from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
 
 from src.core.database import engine
+from src.orm.base import Base
+from src.orm.milestone_tags import milestone_tags
+from src.orm.tags import Tag
 from src.milestones.slug import slug_from_title, slug_with_suffix
-
-
-class Base(DeclarativeBase):
-    pass
 
 
 class Milestone(Base):
@@ -22,6 +23,10 @@ class Milestone(Base):
     happened_at: Mapped[date] = mapped_column(Date)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
+    tags: Mapped[list[Tag]] = relationship(
+        secondary=milestone_tags,
+        back_populates="milestones",
     )
 
     @classmethod
