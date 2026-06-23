@@ -20,14 +20,14 @@ repos:
         language: system
         files: ^src/templates/.*\.html$
 
-      - id: pytest
-        name: Pytest
-        entry: poetry run pytest
-        language: system
-        pass_filenames: false
-
       - id: stylelint
         name: Stylelint
         entry: npx stylelint
         language: system
         files: ^src/static/.*\.css$
+
+      - id: pytest
+        name: Pytest
+        entry: poetry run pytest
+        language: system
+        pass_filenames: false
