@@ -13,6 +13,7 @@ class MilestoneCreateDTO(BaseModel):
     title: str
     happened_at: date
     description: str = ""
+    tags: str = ""
 
     @field_validator("title")
     @classmethod

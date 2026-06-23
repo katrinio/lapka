@@ -19,6 +19,11 @@
                    required>
         </label>
         <label>
+            Tags
+            <input name="tags"
+            value="{{ milestone.tags | map(attribute='name') | join(' ') }}">
+        </label>
+        <label>
             Description
             <textarea name="description">{{ milestone.description }}</textarea>
         </label>
