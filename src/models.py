@@ -4,7 +4,7 @@ from typing import Sequence
 from sqlalchemy import Date, DateTime, String, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
 
-from database import engine
+from src.database import engine
 
 
 class Base(DeclarativeBase):

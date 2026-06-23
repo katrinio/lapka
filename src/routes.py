@@ -1,20 +1,20 @@
 from collections import OrderedDict
+from collections.abc import Sequence
 from datetime import date
-
 from pathlib import Path
 
 from fastapi import APIRouter, Form, Request
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
-from models import Milestone
+from src.models import Milestone
 
 router = APIRouter()
 templates = Jinja2Templates(directory=Path(__file__).parent / "templates")
 
 
-def _group_by_day(milestones: list) -> OrderedDict:
-    grouped: dict = {}
+def _group_by_day(milestones: Sequence[Milestone]) -> OrderedDict[str, list[Milestone]]:
+    grouped: dict[str, list[Milestone]] = {}
     for m in milestones:
         day = str(m.happened_at)
         grouped.setdefault(day, []).append(m)

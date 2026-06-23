@@ -3,9 +3,9 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from database import engine
-from models import Base
-from routes import router
+from src.database import engine
+from src.models import Base
+from src.routes import router
 
 SRC = Path(__file__).parent
 
