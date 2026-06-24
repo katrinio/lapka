@@ -3,15 +3,16 @@ from datetime import date
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-from src.milestones.tags import parse_tags
-from src.orm.base import Base
+from src.milestones.helpers import parse_tags
+from src.database import Base
 from src.orm.milestone import Milestone
-from src.orm.tags import Tag
+from src.orm.tag import Tag
 
 
 def _setup_engine(tmp_path, monkeypatch):
     engine = create_engine(f"sqlite:///{tmp_path / 'test.db'}")
     monkeypatch.setattr("src.orm.milestone.engine", engine)
+    monkeypatch.setattr("src.orm.tag.engine", engine)
     Base.metadata.create_all(engine)
     return engine
 
