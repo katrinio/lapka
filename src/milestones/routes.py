@@ -11,6 +11,7 @@ from pydantic import ValidationError
 from src.milestones.dto import MilestoneCreateDTO, MilestoneUpdateDTO
 from src.milestones.tags import parse_tags
 from src.orm.milestone import Milestone
+from src.orm.tags import Tag
 
 router = APIRouter()
 templates = Jinja2Templates(directory=Path(__file__).parent.parent / "templates")
@@ -138,3 +139,16 @@ def update_milestone(
         tags=parse_tags(dto.tags),
     )
     return RedirectResponse(url=f"/milestones/{updated.slug}", status_code=303)
+
+
+@router.get("/tags/{tag}")
+def get_tag_page(request: Request, tag_slug: str):
+    tag = Tag.get_by_name(tag_slug.upper())
+    return templates.TemplateResponse(
+        request,
+        "milestones/tag.html",
+        {
+            "tag": tag,
+            "milestones": tag.milestones if tag is not None else [],
+        },
+    )

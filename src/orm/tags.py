@@ -1,10 +1,13 @@
 
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Sequence
 
-from sqlalchemy import String
+from sqlalchemy import String, select
+from sqlalchemy.future import select
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm.session import Session
 
+from src.core.database import engine
 from src.orm.base import Base
 from src.orm.milestone_tags import milestone_tags
 
@@ -22,3 +25,13 @@ class Tag(Base):
         back_populates="tags",
         lazy="selectin",
     )
+
+    @classmethod
+    def all(cls) -> Sequence["Tag"]:
+        with Session(engine) as session:
+            return session.execute(select(cls)).scalars().all()
+
+    @classmethod
+    def get_by_name(cls, name: str) -> "Tag | None":
+        with Session(engine) as session:
+            return session.execute(select(cls).where(cls.name == name)).scalars().first()
