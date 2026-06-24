@@ -4,6 +4,7 @@ from pathlib import Path
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.templating import Jinja2Templates
 
+from src.milestones.services import group_by_day
 from src.orm.tag import Tag
 
 router = APIRouter()
@@ -35,6 +36,6 @@ def tag_page(request: Request, tag_name: str):
         "tags/tag.html",
         {
             "tag": tag,
-            "milestones": milestones,
+            "grouped_milestones": group_by_day(milestones),
         },
     )
