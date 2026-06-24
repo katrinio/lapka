@@ -14,9 +14,7 @@
                     {% if milestone.tags %}
                         <div class="milestone-tags">
                             {% for tag in milestone.tags %}
-                                <a class="milestone-tag" href="/tags/{{ tag.name }}">
-                                    [{{ tag.name }}]
-                                </a>
+                                <a class="milestone-tag" href="/tags/{{ tag.name }}">[{{ tag.name }}]</a>
                             {% endfor %}
                         </div>
                     {% endif %}

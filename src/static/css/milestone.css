@@ -18,11 +18,6 @@
 
 .milestone-tag {
   color: var(--accent);
-  opacity: 0.85;
-}
-
-.milestone-tag {
-  color: var(--accent);
   text-decoration: none;
   opacity: 0.85;
 }
@@ -38,7 +33,7 @@
 }
 
 .page-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
