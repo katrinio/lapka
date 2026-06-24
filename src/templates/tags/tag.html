@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Tag {{ tag.name }}{% endblock %}
+
+{% block content %}
+    <a class="back" href="/">← Back</a>
+
+    <header>
+        <div class="prompt">katrin@echo_:~$ tag {{ tag.name }}</div>
+        <h1>[{{ tag.name }}]</h1>
+    </header>
+
+    <section class="list">
+        {% for milestone in milestones %}
+            <a class="item tree-item" href="/milestones/{{ milestone.slug }}">
+                <span class="tree-branch">
+                    {% if loop.last %}
+                        └─
+                    {% else %}
+                        ├─
+                    {% endif %}
+                </span>
+                <span class="slug">{{ milestone.slug }}</span>
+            </a>
+        {% endfor %}
+    </section>
+{% endblock %}

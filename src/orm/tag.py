@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Sequence
 
 from sqlalchemy import String, select
 from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
+from sqlalchemy.orm import selectinload
 
 from src.database import Base, engine
 from src.orm.milestone_tags import milestone_tags
@@ -32,7 +33,11 @@ class Tag(Base):
     @classmethod
     def get_by_name(cls, name: str) -> Tag | None:
         with Session(engine) as session:
-            return session.execute(select(cls).where(cls.name == name)).scalars().first()
+            return session.execute(
+                select(cls)
+                .options(selectinload(cls.milestones))
+                .where(cls.name == name)
+            ).scalars().first()
 
     @classmethod
     def get_or_create_many(cls, session: Session, names: list[str]) -> list[Tag]:
