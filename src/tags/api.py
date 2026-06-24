@@ -29,7 +29,9 @@ def tag_page(request: Request, tag_name: str):
         raise HTTPException(status_code=404, detail="Tag not found")
 
     milestones = list(tag.milestones)
-    logger.debug("Tag found for tag_name=%s milestone_count=%s", tag_name, len(milestones))
+    logger.debug(
+        "Tag found for tag_name=%s milestone_count=%s", tag_name, len(milestones)
+    )
 
     return templates.TemplateResponse(
         request,

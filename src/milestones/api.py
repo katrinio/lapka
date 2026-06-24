@@ -55,7 +55,9 @@ def create_milestone(
     tags: str = Form(default=""),
 ):
     try:
-        dto = MilestoneCreateDTO(title=title, happened_at=happened_at, description=description, tags=tags)
+        dto = MilestoneCreateDTO(
+            title=title, happened_at=happened_at, description=description, tags=tags
+        )
     except ValidationError as exc:
         return templates.TemplateResponse(
             request,
@@ -101,7 +103,9 @@ def update_milestone(
     tags: str = Form(default=""),
 ):
     try:
-        dto = MilestoneUpdateDTO(title=title, happened_at=happened_at, description=description, tags=tags)
+        dto = MilestoneUpdateDTO(
+            title=title, happened_at=happened_at, description=description, tags=tags
+        )
     except ValidationError as exc:
         return templates.TemplateResponse(
             request,

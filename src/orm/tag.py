@@ -33,17 +33,24 @@ class Tag(Base):
     @classmethod
     def get_by_name(cls, name: str) -> Tag | None:
         with Session(engine) as session:
-            return session.execute(
-                select(cls)
-                .options(selectinload(cls.milestones))
-                .where(cls.name == name)
-            ).scalars().first()
+            return (
+                session.execute(
+                    select(cls)
+                    .options(selectinload(cls.milestones))
+                    .where(cls.name == name)
+                )
+                .scalars()
+                .first()
+            )
 
     @classmethod
     def get_or_create_many(cls, session: Session, names: list[str]) -> list[Tag]:
         if not names:
             return []
-        existing = {t.name: t for t in session.execute(select(cls).where(cls.name.in_(names))).scalars()}
+        existing = {
+            t.name: t
+            for t in session.execute(select(cls).where(cls.name.in_(names))).scalars()
+        }
         result: list[Tag] = []
         for name in names:
             tag = existing.get(name) or cls(name=name)
