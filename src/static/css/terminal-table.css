@@ -1,21 +1,21 @@
-.tag-list {
+.terminal-table {
   max-width: 520px;
   margin-top: 32px;
   font-family: monospace;
 }
 
-.tag-row {
+.terminal-table-row {
   display: flex;
   align-items: center;
   color: var(--text);
   text-decoration: none;
 }
 
-.tag-name {
+.terminal-table-label {
   white-space: nowrap;
 }
 
-.tag-dots {
+.terminal-table-dots {
   flex: 1;
   color: var(--muted);
   opacity: 0.55;
@@ -24,7 +24,7 @@
   margin: 0 8px;
 }
 
-.tag-count {
+.terminal-table-value {
   min-width: 3ch;
   text-align: right;
   color: var(--text);

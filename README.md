@@ -35,7 +35,7 @@ tags: [VPN, INFRA, FRIENDS]
 slug: VPN_FOR_FRIENDS
 ```
 
-Tags are freeform. Each tag links to a page listing all milestones that share it.
+Tags are terminal labels. They are normalized to uppercase and may contain only A-Z, 0-9 and underscore. The `tags` terminal command opens a page with all tags and milestone counts.
 
 ---
 ## Why

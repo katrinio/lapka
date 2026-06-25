@@ -1,11 +1,12 @@
 const input = document.getElementById("tags-input");
 const suggestions = document.getElementById("tag-suggestions");
-const terminalInput = document.getElementById("terminal-command");
 
+// Проверяет, что символ разделяет теги.
 function isSeparator(char) {
   return char === " " || char === ",";
 }
 
+// Находит границы текущего токена под курсором.
 function getTokenRange(value, cursor) {
   let start = cursor;
   while (start > 0 && !isSeparator(value[start - 1])) {
@@ -20,6 +21,7 @@ function getTokenRange(value, cursor) {
   return [start, end];
 }
 
+// Подбирает пробел после вставленного тега, если он нужен.
 function normalizeSpacing(value, insertedEnd) {
   if (insertedEnd >= value.length) {
     return "";
@@ -35,6 +37,7 @@ if (input && suggestions) {
     .map((tag) => tag.trim())
     .filter(Boolean);
 
+  // Перерисовывает список подсказок под текущим курсором.
   function renderSuggestions() {
     const value = input.value;
     const cursor = input.selectionStart ?? value.length;
@@ -72,17 +75,4 @@ if (input && suggestions) {
   input.addEventListener("input", renderSuggestions);
   input.addEventListener("keyup", renderSuggestions);
   input.addEventListener("click", renderSuggestions);
-}
-
-if (terminalInput) {
-  terminalInput.addEventListener("keydown", (event) => {
-    if (event.key !== "Enter") {
-      return;
-    }
-
-    const command = terminalInput.value.trim().toLowerCase();
-    if (command === "tags") {
-      window.location.href = "/tags";
-    }
-  });
 }

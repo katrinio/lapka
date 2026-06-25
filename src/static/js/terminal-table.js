@@ -1,3 +1,4 @@
+// Измеряет ширину символа в текущем моноширинном шрифте.
 function getMonospaceCharWidth(element) {
   const style = window.getComputedStyle(element);
   const canvas = getMonospaceCharWidth.canvas || document.createElement("canvas");
@@ -13,6 +14,7 @@ function getMonospaceCharWidth(element) {
   return sample.width || 8;
 }
 
+// Измеряет ширину точки в текущем шрифте.
 function getDotWidth(element) {
   const style = window.getComputedStyle(element);
   const canvas = getDotWidth.canvas || document.createElement("canvas");
@@ -28,22 +30,27 @@ function getDotWidth(element) {
   return sample.width || 8;
 }
 
+// Собирает все строки одной терминальной таблицы.
 function getTableRows(table) {
   return Array.from(table.querySelectorAll("[data-terminal-table-row]"));
 }
 
+// Берёт label-элемент строки.
 function getLabel(row) {
   return row.querySelector("[data-terminal-label]");
 }
 
+// Берёт блок с точками.
 function getDots(row) {
   return row.querySelector("[data-terminal-dots]");
 }
 
+// Берёт значение строки.
 function getValue(row) {
   return row.querySelector("[data-terminal-value]");
 }
 
+// Заполняет точки по реальному месту между label и value.
 function formatTable(table) {
   const rows = getTableRows(table);
   if (!rows.length) {
@@ -72,6 +79,7 @@ function formatTable(table) {
   });
 }
 
+// Инициализирует пересчёт для всех таблиц на странице.
 function initTerminalTables() {
   const tables = document.querySelectorAll("[data-terminal-table]");
   tables.forEach((table) => {
