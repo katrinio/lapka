@@ -33,6 +33,23 @@ class Milestone(Base):
     )
 
     @classmethod
+    def _slug_for_title(
+        cls, session: Session, title: str, *, exclude_id: int | None = None
+    ) -> str:
+        base_slug = slug_from_title(title)
+        slug = base_slug
+        suffix = 1
+
+        while True:
+            query = select(cls).where(cls.slug == slug)
+            if exclude_id is not None:
+                query = query.where(cls.id != exclude_id)
+            if session.execute(query).scalars().first() is None:
+                return slug
+            suffix += 1
+            slug = slug_with_suffix(base_slug, suffix)
+
+    @classmethod
     def create_with_title(
         cls,
         *,
@@ -43,14 +60,8 @@ class Milestone(Base):
     ) -> Milestone:
         from src.orm.tag import Tag as TagModel
 
-        base_slug = slug_from_title(title)
-        slug = base_slug
-
         with Session(engine) as session:
-            suffix = 1
-            while session.execute(select(cls).where(cls.slug == slug)).scalars().first() is not None:
-                suffix += 1
-                slug = slug_with_suffix(base_slug, suffix)
+            slug = cls._slug_for_title(session, title)
 
             milestone = cls(
                 title=title,
@@ -92,6 +103,7 @@ class Milestone(Base):
             if milestone is None:
                 raise ValueError(f"Milestone not found: {slug}")
 
+            milestone.slug = cls._slug_for_title(session, title, exclude_id=milestone.id)
             milestone.title = title
             milestone.happened_at = happened_at
             milestone.description = description
