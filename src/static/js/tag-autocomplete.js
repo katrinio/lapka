@@ -1,5 +1,6 @@
 const input = document.getElementById("tags-input");
 const suggestions = document.getElementById("tag-suggestions");
+const terminalInput = document.getElementById("terminal-command");
 
 function isSeparator(char) {
   return char === " " || char === ",";
@@ -71,4 +72,17 @@ if (input && suggestions) {
   input.addEventListener("input", renderSuggestions);
   input.addEventListener("keyup", renderSuggestions);
   input.addEventListener("click", renderSuggestions);
+}
+
+if (terminalInput) {
+  terminalInput.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") {
+      return;
+    }
+
+    const command = terminalInput.value.trim().toLowerCase();
+    if (command === "tags") {
+      window.location.href = "/tags";
+    }
+  });
 }

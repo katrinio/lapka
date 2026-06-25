@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Sequence
 
-from sqlalchemy import String, select
+from sqlalchemy import String, func, select
 from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
 from sqlalchemy.orm import selectinload
 
@@ -31,6 +31,19 @@ class Tag(Base):
             return session.execute(
                 select(cls).order_by(cls.name)
             ).scalars().all()
+
+    @classmethod
+    def all_with_counts(cls) -> list[tuple[str, int]]:
+        from src.orm.milestone import Milestone
+
+        with Session(engine) as session:
+            rows = session.execute(
+                select(Tag.name, func.count(Milestone.id))
+                .outerjoin(Tag.milestones)
+                .group_by(Tag.id)
+                .order_by(Tag.name)
+            ).all()
+            return [(name, int(count)) for name, count in rows]
 
     @classmethod
     def get_by_name(cls, name: str) -> Tag | None:
