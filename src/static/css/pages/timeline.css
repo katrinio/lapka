@@ -1,11 +1,11 @@
-/* ===== Дерево событий на главной ===== */
+/* Дерево событий на главной */
 .list {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
-/* ===== Группировка по дням ===== */
+/* Группировка по дням */
 .day-group {
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
   margin-bottom: 2px;
 }
 
-/* ===== Ссылка на веху в списке ===== */
+/* Ссылка на запись в списке */
 .tree-item {
   display: grid;
   grid-template-columns: 3ch 1fr;
