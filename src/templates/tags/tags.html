@@ -7,10 +7,11 @@
     </header>
     <section class="tag-list">
         {% for tag, count in tags %}
-            <div class="tag-row">
+            <a class="tag-row" href="/tags/{{ tag }}">
                 <span class="tag-name">{{ tag }}</span>
+                <span class="tag-dots"></span>
                 <span class="tag-count">{{ count }}</span>
-            </div>
+            </a>
         {% endfor %}
     </section>
 {% endblock %}

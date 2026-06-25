@@ -1,21 +1,28 @@
 .tag-list {
-  margin-top: 24px;
-  max-width: 420px;
+  max-width: 520px;
+  margin-top: 32px;
 }
 
 .tag-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 16px;
-  padding: 6px 0;
+  display: flex;
+  align-items: center;
   color: var(--text);
   text-decoration: none;
 }
 
-.tag-row:hover .tag-name {
-  color: var(--accent);
+.tag-name {
+  white-space: nowrap;
+}
+
+.tag-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--muted);
+  opacity: 0.5;
+  margin: 0 8px;
 }
 
 .tag-count {
-  color: var(--muted);
+  min-width: 2ch;
+  text-align: right;
+  color: var(--text);
 }
