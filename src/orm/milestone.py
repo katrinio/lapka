@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Sequence
 
 from sqlalchemy import Date, DateTime, String, select
 from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
+from sqlalchemy.sql.functions import func
 
 from src.database import Base, engine
 from src.orm.milestone_tags import milestone_tags
@@ -85,6 +86,11 @@ class Milestone(Base):
     def get_by_slug(cls, slug: str) -> Milestone | None:
         with Session(engine) as session:
             return session.execute(select(cls).where(cls.slug == slug)).scalars().first()
+
+    @classmethod
+    def get_random(cls) -> Milestone | None:
+        with Session(engine) as session:
+            return session.execute(select(cls).order_by(func.random())).scalars().first()
 
     @classmethod
     def update_by_slug(
