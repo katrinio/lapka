@@ -2,7 +2,9 @@ from datetime import date
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+from pydantic import ValidationError
 
+from src.milestones.dto import MilestoneCreateDTO
 from src.milestones.helpers import parse_tags
 from src.database import Base
 from src.orm.milestone import Milestone
@@ -27,6 +29,71 @@ def test_parse_tags_handles_repeated_values():
 
 def test_parse_tags_handles_empty_string():
     assert parse_tags("") == []
+
+
+def test_parse_tags_normalizes_case_and_trims():
+    assert parse_tags("  projects  health_2026  ") == ["HEALTH_2026", "PROJECTS"]
+
+
+def test_parse_tags_removes_duplicates():
+    assert parse_tags("vpn vpn infra") == ["INFRA", "VPN"]
+
+
+def test_parse_tags_accepts_valid_terminal_tags():
+    assert parse_tags("PROJECTS HEALTH_2026 1984") == ["1984", "HEALTH_2026", "PROJECTS"]
+
+
+def test_parse_tags_rejects_invalid_tags():
+    invalid_values = ["NOPE.", "work-life", "ПРР", "tag/name", "hello!"]
+    for value in invalid_values:
+        try:
+            parse_tags(value)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"{value!r} should be rejected")
+
+
+def test_parse_tags_ignores_empty_tokens():
+    assert parse_tags("   ") == []
+    assert parse_tags("vpn   ") == ["VPN"]
+
+
+def test_parse_tags_rejects_too_long_tag():
+    try:
+        parse_tags("A" * 33)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("Too long tag should be rejected")
+
+
+def test_milestone_dto_returns_clear_error_for_invalid_tag():
+    try:
+        MilestoneCreateDTO(
+            title="Example",
+            happened_at=date(2026, 6, 22),
+            tags="NOPE.",
+        )
+    except ValidationError as exc:
+        assert "Invalid tag" in str(exc)
+    else:
+        raise AssertionError("Expected validation error")
+
+
+def test_direct_model_creation_rejects_invalid_tag(tmp_path, monkeypatch):
+    _setup_engine(tmp_path, monkeypatch)
+
+    try:
+        Milestone.create_with_title(
+            title="Example",
+            happened_at=date(2026, 6, 22),
+            tags=["RR-T"],
+        )
+    except ValueError as exc:
+        assert "Invalid tag" in str(exc)
+    else:
+        raise AssertionError("Expected invalid tag to be rejected")
 
 
 def test_create_milestone_creates_tags_and_relations(tmp_path, monkeypatch):

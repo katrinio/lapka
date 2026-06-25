@@ -8,6 +8,7 @@ from sqlalchemy.orm import selectinload
 
 from src.database import Base, engine
 from src.orm.milestone_tags import milestone_tags
+from src.milestones.helpers import normalize_tag
 
 if TYPE_CHECKING:
     from src.orm.milestone import Milestone
@@ -62,6 +63,7 @@ class Tag(Base):
     def get_or_create_many(cls, session: Session, names: list[str]) -> list[Tag]:
         if not names:
             return []
+        names = [normalize_tag(name) for name in names]
         existing = {
             t.name: t
             for t in session.execute(select(cls).where(cls.name.in_(names))).scalars()

@@ -7,7 +7,6 @@ from fastapi.templating import Jinja2Templates
 from pydantic import ValidationError
 
 from src.milestones.dto import MilestoneCreateDTO, MilestoneUpdateDTO
-from src.milestones.helpers import parse_tags
 from src.orm.milestone import Milestone
 from src.milestones.services import group_by_day
 from src.orm.tag import Tag
@@ -78,7 +77,7 @@ def create_milestone(
         title=dto.title,
         happened_at=dto.happened_at,
         description=dto.description,
-        tags=parse_tags(dto.tags),
+        tags=dto.tags.split() if dto.tags else [],
     )
     return RedirectResponse(url="/", status_code=303)
 
@@ -134,6 +133,6 @@ def update_milestone(
         title=dto.title,
         happened_at=dto.happened_at,
         description=dto.description,
-        tags=parse_tags(dto.tags),
+        tags=dto.tags.split() if dto.tags else [],
     )
     return RedirectResponse(url=f"/milestones/{updated.slug}", status_code=303)

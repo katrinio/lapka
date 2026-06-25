@@ -6,6 +6,8 @@ from datetime import date
 from pydantic.functional_validators import field_validator
 from pydantic.main import BaseModel
 
+from src.milestones.helpers import parse_tags
+
 _TITLE_RE = re.compile(r"^[A-Za-z0-9 .\-]+$")
 
 
@@ -38,6 +40,11 @@ class MilestoneCreateDTO(BaseModel):
     @classmethod
     def description_stripped(cls, v: str) -> str:
         return v.strip()
+
+    @field_validator("tags")
+    @classmethod
+    def tags_are_valid(cls, v: str) -> str:
+        return " ".join(parse_tags(v))
 
 
 class MilestoneUpdateDTO(MilestoneCreateDTO):
