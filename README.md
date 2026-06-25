@@ -20,8 +20,6 @@ Examples
 
 2026-06-21
 └─ DOMAIN_AND_SSL
-
-2026-05-27
 └─ FINPIPE_V1_0_0
 ```
 
@@ -50,6 +48,20 @@ A decision.
 A strange idea at 2 a.m.
 Something that would make it into a New Year's recap.
 
+Everything is intentionally small, simple and fast.
+---
+## Terminal
+
+Everything can be done from the terminal.
+
+```
+echo_ > help
+echo_ > random
+echo_ > tag VPN
+...
+```
+The terminal is a navigation layer, not a shell.
+It opens existing pages and keeps navigation fast.
 ---
 ## Tech
 
@@ -61,18 +73,8 @@ Something that would make it into a New Year's recap.
 - No frontend build step.
 - No SPA.
 - No JavaScript framework.
+- Keyboard-first interface.
 
 ---
-## Setup
+for setup visit docs/development.md
 
-```bash
-poetry install
-poetry run alembic upgrade head
-poetry run uvicorn src.app:app --reload
-```
-
-If tables were already created before running migrations:
-
-```bash
-poetry run alembic stamp 4f1b2d9c7a11
-```
