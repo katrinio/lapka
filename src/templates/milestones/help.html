@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}help{% endblock %}
+{% block content %}
+    <a class="back" href="/">← Back</a>
+    <header>
+        <div class="prompt">katrin@echo_:~$ help</div>
+    </header>
+    <section class="help-screen">
+        <p class="help-intro">Echo is command-first. Use the terminal input to navigate.</p>
+        <div class="terminal-table" data-terminal-table>
+            {% for command in commands %}
+                <div class="terminal-table-row" data-terminal-table-row>
+                    <span class="terminal-label" data-terminal-label>{{ command.name }}</span>
+                    <span class="terminal-dots" data-terminal-dots></span>
+                    <span class="terminal-value" data-terminal-value>{{ command.description }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

@@ -83,6 +83,10 @@ if (terminalInput) {
     const command = terminalInput.value.trim().toLowerCase();
     if (command === "tags") {
       window.location.href = "/tags";
+    if (command === "help") {
+      window.location.href = "/help";
+  return;
+}
     }
   });
 }
