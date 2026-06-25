@@ -94,6 +94,77 @@ def test_updating_milestone_replaces_tag_relations(tmp_path, monkeypatch):
         ]
 
 
+def test_updating_milestone_keeps_slug_when_title_is_unchanged(tmp_path, monkeypatch):
+    _setup_engine(tmp_path, monkeypatch)
+
+    milestone = Milestone.create_with_title(
+        title="VPN for friends",
+        happened_at=date(2026, 6, 22),
+        tags=parse_tags("vpn infra"),
+    )
+
+    updated = Milestone.update_by_slug(
+        milestone.slug,
+        title="VPN for friends",
+        happened_at=date(2026, 6, 21),
+        description="updated",
+        tags=parse_tags("infra"),
+    )
+
+    assert updated.slug == milestone.slug
+    assert updated.title == "VPN for friends"
+
+
+def test_updating_milestone_regenerates_slug_when_title_changes(tmp_path, monkeypatch):
+    _setup_engine(tmp_path, monkeypatch)
+
+    milestone = Milestone.create_with_title(
+        title="VPN for friends",
+        happened_at=date(2026, 6, 22),
+        tags=parse_tags("vpn infra"),
+    )
+
+    updated = Milestone.update_by_slug(
+        milestone.slug,
+        title="Infra for friends",
+        happened_at=date(2026, 6, 21),
+        description="updated",
+        tags=parse_tags("infra"),
+    )
+
+    assert updated.slug == "INFRA_FOR_FRIENDS"
+    assert updated.slug != milestone.slug
+
+
+def test_updating_milestone_uses_unique_slug_when_title_conflicts(tmp_path, monkeypatch):
+    _setup_engine(tmp_path, monkeypatch)
+
+    original = Milestone.create_with_title(
+        title="VPN for friends",
+        happened_at=date(2026, 6, 22),
+        tags=parse_tags("vpn infra"),
+    )
+    conflict = Milestone.create_with_title(
+        title="Infra for friends",
+        happened_at=date(2026, 6, 21),
+        tags=parse_tags("infra"),
+    )
+
+    updated = Milestone.update_by_slug(
+        original.slug,
+        title="Infra for friends",
+        happened_at=date(2026, 6, 20),
+        description="updated",
+        tags=parse_tags("vpn"),
+    )
+
+    assert conflict.slug == "INFRA_FOR_FRIENDS"
+    assert updated.slug == "INFRA_FOR_FRIENDS_2"
+    assert updated.id == original.id
+    assert updated.created_at == original.created_at
+    assert [tag.name for tag in updated.tags] == ["VPN"]
+
+
 def test_tag_page_uses_all_milestones_for_tag(tmp_path, monkeypatch):
     _setup_engine(tmp_path, monkeypatch)
 
