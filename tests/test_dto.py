@@ -1,4 +1,4 @@
-from src.milestones.dto import MilestoneCreateDTO
+from src.features.milestones.dto import MilestoneCreateDTO
 import unittest
 from datetime import date, timedelta
 from pathlib import Path

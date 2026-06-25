@@ -3,6 +3,7 @@ const terminalInput = document.getElementById("terminal-command");
 // Сопоставляет введённую команду с URL.
 const COMMAND_ROUTES = {
   help: "/help",
+  new: "/new",
   tags: "/tags",
 };
 

@@ -4,8 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from pydantic import ValidationError
 
-from src.milestones.dto import MilestoneCreateDTO
-from src.milestones.helpers import parse_tags
+from src.features.milestones.dto import MilestoneCreateDTO
+from src.features.milestones.helpers import parse_tags
 from src.database import Base
 from src.orm.milestone import Milestone
 from src.orm.tag import Tag

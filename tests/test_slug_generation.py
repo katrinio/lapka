@@ -1,6 +1,6 @@
 import unittest
 
-from src.milestones.helpers import slug_from_title, slug_with_suffix
+from src.features.milestones.helpers import slug_from_title, slug_with_suffix
 
 
 class SlugGenerationTest(unittest.TestCase):

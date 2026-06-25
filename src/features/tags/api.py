@@ -1,23 +1,13 @@
 import logging
-from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.templating import Jinja2Templates
 
-from src.milestones.services import group_by_day
+from src.features.milestones.services import group_by_day
 from src.orm.tag import Tag
+from src.web.templates import templates
 
 router = APIRouter()
-_TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
-templates = Jinja2Templates(directory=_TEMPLATES_DIR)
 logger = logging.getLogger(__name__)
-
-
-def _asset_version(rel_path: str) -> int:
-    return int((_TEMPLATES_DIR.parent / "static" / rel_path).stat().st_mtime)
-
-
-templates.env.globals["asset_version"] = _asset_version
 
 
 @router.get("/tags/{tag_name}")

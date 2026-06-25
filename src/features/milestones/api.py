@@ -1,28 +1,16 @@
 from datetime import date
-from pathlib import Path
 
 from fastapi import APIRouter, Form, Request
 from fastapi.responses import RedirectResponse
-from fastapi.templating import Jinja2Templates
 from pydantic import ValidationError
 
-from src.milestones.dto import MilestoneCreateDTO, MilestoneUpdateDTO
+from src.features.milestones.dto import MilestoneCreateDTO, MilestoneUpdateDTO
+from src.features.milestones.services import group_by_day
 from src.orm.milestone import Milestone
-from src.milestones.services import group_by_day
 from src.orm.tag import Tag
-from src.milestones.commands import COMMANDS
+from src.web.templates import templates
 
 router = APIRouter()
-
-_TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
-templates = Jinja2Templates(directory=_TEMPLATES_DIR)
-
-
-def _asset_version(rel_path: str) -> int:
-    return int((_TEMPLATES_DIR.parent / "static" / rel_path).stat().st_mtime)
-
-
-templates.env.globals["asset_version"] = _asset_version
 
 
 def _first_error(exc: ValidationError) -> str:
@@ -82,14 +70,6 @@ def create_milestone(
     )
     return RedirectResponse(url="/", status_code=303)
 
-@router.get("/help")
-def help_page(request: Request):
-    return templates.TemplateResponse(
-        request,
-        "milestones/help.html",
-        {"commands": COMMANDS},
-    )
-
 @router.get("/milestones/{slug}")
 def milestone_detail(request: Request, slug: str):
     return templates.TemplateResponse(
@@ -144,4 +124,3 @@ def update_milestone(
         tags=dto.tags.split() if dto.tags else [],
     )
     return RedirectResponse(url=f"/milestones/{updated.slug}", status_code=303)
-
