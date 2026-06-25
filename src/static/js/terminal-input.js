@@ -1,4 +1,5 @@
 const terminalInput = document.getElementById("terminal-command");
+const mobileViewport = window.matchMedia("(width <= 720px)");
 
 // Сопоставляет введённую команду с URL.
 const COMMAND_HANDLERS = {
@@ -51,5 +52,19 @@ if (terminalInput) {
     if (typeof result === "string") {
       window.alert(result);
     }
+  });
+
+  // На мобильных экранах мягко прокручивает страницу к терминалу после фокуса.
+  terminalInput.addEventListener("focus", () => {
+    if (!mobileViewport.matches) {
+      return;
+    }
+
+    window.requestAnimationFrame(() => {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    });
   });
 }
