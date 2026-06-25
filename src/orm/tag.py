@@ -2,11 +2,12 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Sequence
 
-from sqlalchemy import String, select
+from sqlalchemy import String, func, select
 from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
 from sqlalchemy.orm import selectinload
 
 from src.database import Base, engine
+from src.orm.milestone import Milestone
 from src.orm.milestone_tags import milestone_tags
 
 if TYPE_CHECKING:
@@ -31,6 +32,16 @@ class Tag(Base):
             return session.execute(
                 select(cls).order_by(cls.name)
             ).scalars().all()
+
+    @classmethod
+    def all_with_counts(cls) -> list[tuple[str, int]]:
+        with Session(engine) as session:
+            return session.execute(
+                select(Tag.name, func.count(Milestone.id))
+                .outerjoin(Tag.milestones)
+                .group_by(Tag.id)
+                .order_by(Tag.name)
+            ).all()
 
     @classmethod
     def get_by_name(cls, name: str) -> Tag | None:

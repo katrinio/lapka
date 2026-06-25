@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}tags{% endblock %}
+{% block content %}
+    <a class="back" href="/">← Back</a>
+    <header>
+        <div class="prompt">katrin@echo_:~$ tags</div>
+    </header>
+    <section class="tag-list">
+        {% for tag, count in tags %}
+            <div class="tag-row">
+                <span class="tag-name">{{ tag }}</span>
+                <span class="tag-count">{{ count }}</span>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,21 @@
+.tag-list {
+  margin-top: 24px;
+  max-width: 420px;
+}
+
+.tag-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  padding: 6px 0;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.tag-row:hover .tag-name {
+  color: var(--accent);
+}
+
+.tag-count {
+  color: var(--muted);
+}

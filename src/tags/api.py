@@ -41,3 +41,13 @@ def tag_page(request: Request, tag_name: str):
             "grouped_milestones": group_by_day(milestones),
         },
     )
+
+@router.get("/tags")
+def tags_page(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "tags/tags.html",
+        {
+            "tags": Tag.all_with_counts(),
+        },
+    )
