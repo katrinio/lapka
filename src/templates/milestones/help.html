@@ -5,13 +5,13 @@
     <header>
         <div class="prompt">katrin@echo_:~$ help</div>
     </header>
-    <section class="help-screen" data-terminal-table>
+    <section class="help-screen terminal-table" data-terminal-table>
         <p class="help-intro">Command reference</p>
         {% for command in commands %}
-            <a class="tag-row" data-terminal-table-row>
-                <span class="tag-name" data-terminal-label>{{ command.name }}</span>
-                <span class="tag-dots" data-terminal-dots></span>
-                <span class="tag-count" data-terminal-value>{{ command.description }}</span>
+            <a class="terminal-table-row" data-terminal-table-row>
+                <span class="terminal-table-label" data-terminal-label>{{ command.name }}</span>
+                <span class="terminal-table-dots" data-terminal-dots></span>
+                <span class="terminal-table-value" data-terminal-value>{{ command.description }}</span>
             </a>
         {% endfor %}
     </section>
