@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
 
-from src.milestones.commands import COMMANDS
+from src.features.milestones.commands import COMMANDS
 from src.web.templates import templates
 
 router = APIRouter()

@@ -4,9 +4,9 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from src.database import Base, engine
-from src.milestones.api import router as milestones_router
-from src.terminal.api import router as terminal_router
-from src.tags.api import router as tags_router
+from src.features.milestones.api import router as milestones_router
+from src.features.terminal.api import router as terminal_router
+from src.features.tags.api import router as tags_router
 
 SRC = Path(__file__).parent
 

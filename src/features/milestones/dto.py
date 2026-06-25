@@ -6,7 +6,7 @@ from datetime import date
 from pydantic.functional_validators import field_validator
 from pydantic.main import BaseModel
 
-from src.milestones.helpers import parse_tags
+from src.features.milestones.helpers import parse_tags
 
 _TITLE_RE = re.compile(r"^[A-Za-z0-9 .\-]+$")
 

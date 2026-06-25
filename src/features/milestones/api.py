@@ -4,8 +4,8 @@ from fastapi import APIRouter, Form, Request
 from fastapi.responses import RedirectResponse
 from pydantic import ValidationError
 
-from src.milestones.dto import MilestoneCreateDTO, MilestoneUpdateDTO
-from src.milestones.services import group_by_day
+from src.features.milestones.dto import MilestoneCreateDTO, MilestoneUpdateDTO
+from src.features.milestones.services import group_by_day
 from src.orm.milestone import Milestone
 from src.orm.tag import Tag
 from src.web.templates import templates

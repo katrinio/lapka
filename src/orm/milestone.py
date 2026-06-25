@@ -8,7 +8,7 @@ from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
 
 from src.database import Base, engine
 from src.orm.milestone_tags import milestone_tags
-from src.milestones.helpers import slug_from_title, slug_with_suffix
+from src.features.milestones.helpers import slug_from_title, slug_with_suffix
 
 if TYPE_CHECKING:
     from src.orm.tag import Tag

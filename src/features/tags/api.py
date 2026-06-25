@@ -2,7 +2,7 @@ import logging
 
 from fastapi import APIRouter, HTTPException, Request
 
-from src.milestones.services import group_by_day
+from src.features.milestones.services import group_by_day
 from src.orm.tag import Tag
 from src.web.templates import templates
 

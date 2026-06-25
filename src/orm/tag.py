@@ -8,7 +8,7 @@ from sqlalchemy.orm import selectinload
 
 from src.database import Base, engine
 from src.orm.milestone_tags import milestone_tags
-from src.milestones.helpers import normalize_tag
+from src.features.milestones.helpers import normalize_tag
 
 if TYPE_CHECKING:
     from src.orm.milestone import Milestone
