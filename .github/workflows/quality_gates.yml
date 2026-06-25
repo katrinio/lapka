@@ -1,4 +1,4 @@
-name: 📠 Run Quality Gates
+name: ✓ Quality Gates
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   python-style:
-    name: 📟 Python Style
+    name: 🐍 Python Style
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +33,7 @@ jobs:
         run: env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run djlint src/templates --check
 
   frontend-style:
-    name: 🖥️ Frontend Style
+    name: 🎨 Frontend Style
     runs-on: ubuntu-latest
 
     steps:
@@ -76,7 +76,7 @@ jobs:
         run: env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run pytest
 
   migrations:
-    name: 🗄️ Migrations
+    name: 🗃️ Migrations
     runs-on: ubuntu-latest
 
     steps:
