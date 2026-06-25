@@ -1,4 +1,4 @@
-# echo_
+echo_
 
 STATUS: RUNNING
 
@@ -54,12 +54,11 @@ Everything is intentionally small, simple and fast.
 
 Everything can be done from the terminal.
 
-```
-echo_ > help
-echo_ > random
-echo_ > tag VPN
-...
-```
+<p align="center">
+  <img src="docs/screenshots/help.png" width="500"/>
+</p>
+
+
 The terminal is a navigation layer, not a shell.
 It opens existing pages and keeps navigation fast.
 ---
