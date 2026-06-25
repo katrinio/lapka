@@ -19,7 +19,12 @@
         </label>
         <label>
             Tags
-            <input name="tags" list="tag-options" placeholder="PROJECTS JOY">
+            <input
+                name="tags"
+                list="tag-options"
+                placeholder="PROJECTS JOY"
+                value="{{ milestone.tags | map(attribute='name') | join(' ') }}"
+            >
         </label>
 
         <datalist id="tag-options">
