@@ -24,8 +24,18 @@
         </label>
         <label>
             Tags
-            <input name="tags" placeholder="VPN INFRA FRIENDS">
+            <input id="tags-input"
+                   name="tags"
+                   placeholder="PROJECTS JOY"
+                   autocomplete="off"
+                   data-tags="{{ all_tags | map(attribute='name') | join(',') }}">
         </label>
-        <button type="submit">Save</button>
-    </form>
-{% endblock %}
+        <div id="tag-suggestions" class="tag-suggestions"></div>
+        <datalist id="tag-options">
+            {% for tag in all_tags %}
+                <option value="{{ tag.name }}">
+                {% endfor %}
+            </datalist>
+            <button type="submit">Save</button>
+        </form>
+    {% endblock %}

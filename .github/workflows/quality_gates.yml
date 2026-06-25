@@ -1,4 +1,4 @@
-name: 📠 Run Quality Gates
+name: ✓ Quality Gates
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   python-style:
-    name: 📟 Python Style
+    name: 🐍 Python Style
     runs-on: ubuntu-latest
 
     steps:
@@ -29,11 +29,11 @@ jobs:
       - name: Run MyPy
         run: env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run mypy src
 
-      - name: Run djLint
+      - name: Run djLint (html)
         run: env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run djlint src/templates --check
 
   frontend-style:
-    name: 🖥️ Frontend Style
+    name: 🎨 Frontend Style
     runs-on: ubuntu-latest
 
     steps:
@@ -46,8 +46,14 @@ jobs:
       - name: Install Stylelint
         run: npm install --no-save stylelint stylelint-config-standard
 
-      - name: Run Stylelint
+      - name: Run Stylelint (css)
         run: npx stylelint "src/static/**/*.css"
+
+      - name: Install ESLint
+        run: npm install --no-save eslint
+
+      - name: Run ESLint (js)
+        run: npx eslint "src/static/js/**/*.js"
 
   tests:
     name: 🧪 Tests
@@ -70,7 +76,7 @@ jobs:
         run: env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run pytest
 
   migrations:
-    name: 🗄️ Migrations
+    name: 🗃️ Migrations
     runs-on: ubuntu-latest
 
     steps:
