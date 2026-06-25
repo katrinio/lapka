@@ -4,6 +4,7 @@ const terminalInput = document.getElementById("terminal-command");
 const COMMAND_ROUTES = {
   help: "/help",
   new: "/new",
+  random: "/random",
   tags: "/tags",
 };
 

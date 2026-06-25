@@ -24,4 +24,9 @@ COMMANDS = [
         description="List tags",
         example="tags",
     ),
+    CommandHelp(
+        name="random",
+        description="Random milestone",
+        example="random",
+    ),
 ]
