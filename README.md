@@ -1,54 +1,39 @@
-echo_
-
-STATUS: RUNNING
+echo_  
+running
 
 <p align="center">
-  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWtuYnBucTE1dmFiOW15MTJ6MjR5ZjA5ZzI1MWcxY2tqZm5jMHIydSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JJvlHT0ERLhhhfO/giphy.gif" width="200"/>
+  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWtuYnBucTE1dmFiOW15MTJ6MjR5ZjA5ZzI1MWcxY2tqZm5jMHIydSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JJvlHT0ERLhhhfO/giphy.gif" width="250"/>
 </p>
 
 -----
-A small personal log of things worth remembering.
-- Not a diary.
-- Not a task tracker.
-- Not a second brain.
-- Just milestones.
+A small personal log of things worth remembering.   
+Not a diary.  
+Not a task tracker.  
+Not a second brain.  
+Just milestones.
 ---
-Examples
-```
-2026-06-22
-└─ VPN_FOR_FRIENDS
+### A quick look says more than a long explanation.
 
-2026-06-21
-└─ DOMAIN_AND_SSL
-└─ FINPIPE_V1_0_0
-```
+<p align="center">
+  <img src="docs/screenshots/milestones.png" width="450"/>
+</p>
 
-Each milestone has a title, a date, a description, tags and a stable slug.
 
-```
-title: VPN for friends
-date: 2026-06-22
-description: Психанула и подняла маленький VPN для друзей.
-tags: [VPN, INFRA, FRIENDS]
-slug: VPN_FOR_FRIENDS
-```
 
-Tags are terminal labels. They are normalized to uppercase and may contain only A-Z, 0-9 and underscore. The `tags` terminal command opens a page with all tags and milestone counts.
 
 ---
 ## Why
 
-Most projects collect tasks.
-
-This one collects moments.
-
-A release.
-A move.
-A decision.
-A strange idea at 2 a.m.
+Most projects collect tasks.  
+This one collects moments.  
+A release.  
+A move.  
+A decision.  
+A strange idea at 2 a.m.  
 Something that would make it into a New Year's recap.
 
 Everything is intentionally small, simple and fast.
+
 ---
 ## Terminal
 
@@ -66,14 +51,18 @@ It opens existing pages and keeps navigation fast.
 
 - FastAPI
 - Jinja2
+- SQLAlchemy
+- Pydantic
 - SQLite
 - Alembic
+- Vanilla JavaScript
 
-- No frontend build step.
-- No SPA.
-- No JavaScript framework.
-- Keyboard-first interface.
+## Principles
+No frontend build step.  
+No SPA.  
+No JavaScript framework.  
+Keyboard-first interface.  
+Minimal client-side JavaScript.
 
 ---
-for setup visit docs/development.md
-
+For setup, see [Development Guide](docs/development.md)
