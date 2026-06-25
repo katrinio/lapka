@@ -2,6 +2,6 @@
   <rect width="64" height="64" fill="#111"/>
   <text x="12" y="44"
         fill="#89b482"
-        font-family="monospace"
+        font-family="Menlo, Monaco, Consolas, monospace"
         font-size="32">e_</text>
 </svg>
