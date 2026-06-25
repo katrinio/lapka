@@ -1,27 +1,16 @@
 from datetime import date
-from pathlib import Path
 
 from fastapi import APIRouter, Form, Request
 from fastapi.responses import RedirectResponse
-from fastapi.templating import Jinja2Templates
 from pydantic import ValidationError
 
 from src.milestones.dto import MilestoneCreateDTO, MilestoneUpdateDTO
-from src.orm.milestone import Milestone
 from src.milestones.services import group_by_day
+from src.orm.milestone import Milestone
 from src.orm.tag import Tag
+from src.web.templates import templates
 
 router = APIRouter()
-
-_TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
-templates = Jinja2Templates(directory=_TEMPLATES_DIR)
-
-
-def _asset_version(rel_path: str) -> int:
-    return int((_TEMPLATES_DIR.parent / "static" / rel_path).stat().st_mtime)
-
-
-templates.env.globals["asset_version"] = _asset_version
 
 
 def _first_error(exc: ValidationError) -> str:
