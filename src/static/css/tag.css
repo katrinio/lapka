@@ -1,6 +1,7 @@
 .tag-list {
   max-width: 520px;
   margin-top: 32px;
+  font-family: monospace;
 }
 
 .tag-row {
@@ -16,13 +17,15 @@
 
 .tag-dots {
   flex: 1;
-  border-bottom: 1px dotted var(--muted);
-  opacity: 0.5;
+  color: var(--muted);
+  opacity: 0.55;
+  white-space: nowrap;
+  overflow: hidden;
   margin: 0 8px;
 }
 
 .tag-count {
-  min-width: 2ch;
+  min-width: 3ch;
   text-align: right;
   color: var(--text);
 }

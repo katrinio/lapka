@@ -5,12 +5,12 @@
     <header>
         <div class="prompt">katrin@echo_:~$ tags</div>
     </header>
-    <section class="tag-list">
+    <section class="tag-list" data-terminal-table>
         {% for tag, count in tags %}
-            <a class="tag-row" href="/tags/{{ tag }}">
-                <span class="tag-name">{{ tag }}</span>
-                <span class="tag-dots"></span>
-                <span class="tag-count">{{ count }}</span>
+            <a class="tag-row" href="/tags/{{ tag }}" data-terminal-table-row>
+                <span class="tag-name" data-terminal-label>{{ tag }}</span>
+                <span class="tag-dots" data-terminal-dots></span>
+                <span class="tag-count" data-terminal-value>{{ count }}</span>
             </a>
         {% endfor %}
     </section>
