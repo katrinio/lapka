@@ -3,7 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+        <link rel="icon"
+              type="image/svg+xml"
+              href="/static/icons/favicon.svg?v={{ static_version }}">
+        <link rel="icon"
+              type="image/x-icon"
+              href="/static/icons/favicon.ico?v={{ static_version }}">
+        <link rel="apple-touch-icon"
+              href="/static/icons/apple-touch-icon.png?v={{ static_version }}">
         <title>{% block title %}echo_.log{% endblock %}</title>
         <link rel="stylesheet"
               href="/static/css/base.css?v={{ asset_version("css/base.css") }}">
