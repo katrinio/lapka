@@ -8,10 +8,12 @@ from src.features.milestones.api import router as milestones_router
 from src.features.terminal.api import router as terminal_router
 from src.features.tags.api import router as tags_router
 from src.features.auth.api import router as auth_router
+from src.features.auth.middleware import AuthMiddleware
 
 SRC = Path(__file__).parent
 
 app = FastAPI()
+app.add_middleware(AuthMiddleware)
 app.include_router(auth_router)
 app.mount("/static", StaticFiles(directory=SRC / "static"), name="static")
 app.include_router(milestones_router)

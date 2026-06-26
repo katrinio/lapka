@@ -11,6 +11,9 @@ SESSION_COOKIE_NAME = "echo_session"
 SESSION_MAX_AGE_SECONDS = int(timedelta(days=30).total_seconds())
 
 
+def is_production() -> bool:
+    return os.getenv("ENVIRONMENT") == "production"
+
 def get_session_secret_key() -> str:
     secret_key = os.getenv("SESSION_SECRET_KEY")
     if not secret_key:
@@ -71,7 +74,7 @@ def create_login_response(next_url: str) -> RedirectResponse:
         value=create_session_token(),
         max_age=SESSION_MAX_AGE_SECONDS,
         httponly=True,
-        secure=True,
+        secure=is_production(),
         samesite="lax",
     )
     return response
