@@ -27,7 +27,7 @@ It’s looking back and seeing how everything fits together.
 ---
 ## Terminal
 
-Everything can be done from the terminal.
+Most things start from the terminal.
 
 <p align="center">
   <img src="docs/screenshots/help.png" width="500"/>
@@ -35,7 +35,7 @@ Everything can be done from the terminal.
 
 
 It is not a shell.  
-It is a command layer for quick navigation and small actions inside Echo.
+Just enough CLI to get around.
 
 ---
 
@@ -43,10 +43,11 @@ It is a command layer for quick navigation and small actions inside Echo.
 `FastAPI` · `Jinja2` · `SQLAlchemy` · `Pydantic` · `SQLite` · `Alembic` · `Vanilla JS`
 
 ## Principles
-- Server-rendered
+- Server-rendered HTML
 - Keyboard-first
+- No frontend framework
 - Minimal JavaScript
-
+- 
 ---
 
 For setup, see [Development Guide](docs/development.md)
