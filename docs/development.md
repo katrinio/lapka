@@ -13,6 +13,7 @@ poetry run echo-run
 ```
 
 Open the app at `http://127.0.0.1:8000`.
+The app reads `.env` automatically through `pydantic-settings`.
 
 ### Run in dev mode
 
@@ -21,12 +22,7 @@ poetry run echo-dev
 ```
 
 This starts the app with `sqlite:///echo_dev.db`.
-
-### Alternative local start
-
-```bash
-poetry run uvicorn src.app:app --reload
-```
+This is the preferred local development entrypoint.
 
 ### Database
 
