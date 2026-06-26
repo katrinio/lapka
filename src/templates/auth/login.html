@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}login{% endblock %}
+{% block content %}
+    <header>
+        <div class="prompt">katrin@echo_:~$ login</div>
+    </header>
+    <form class="login-form" method="post">
+        <input type="hidden" name="next" value="{{ next|default("/") }}">
+        <label for="password">Password</label>
+        <div class="terminal-row">
+            <span class="terminal-prompt">echo_ &gt;</span>
+            <input id="password"
+                   class="terminal-input"
+                   type="password"
+                   name="password"
+                   autofocus
+                   autocomplete="current-password"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   spellcheck="false"
+                   required>
+        </div>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </form>
+{% endblock %}

@@ -2,6 +2,7 @@ const terminalInput = document.getElementById("terminal-command");
 
 // Сопоставляет введённую команду с URL.
 const COMMAND_HANDLERS = {
+  logout: () => "/logout",
   help: () => "/help",
   new: () => "/new",
   random: () => "/random",
@@ -29,6 +30,8 @@ if (terminalInput) {
     if (event.key !== "Enter") {
       return;
     }
+
+    event.preventDefault();
 
     const raw = terminalInput.value.trim();
     if (!raw) {

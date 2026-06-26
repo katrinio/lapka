@@ -10,6 +10,11 @@ class CommandHelp:
 
 COMMANDS = [
     CommandHelp(
+        name="logout",
+        description="Logging out",
+        example="logout",
+    ),
+    CommandHelp(
         name="help",
         description="Show available commands",
         example="help",
@@ -25,7 +30,7 @@ COMMANDS = [
         example="tags",
     ),
     CommandHelp(
-        name="tag {TAG_NAME}",
+        name="tag {tag_name}",
         description="Milestones by Tag",
         example="tag TRAVEL",
     ),

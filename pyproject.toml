@@ -3,7 +3,7 @@ packages = [{ include = "src" }]
 
 [project]
 name = "echo-app"
-version = "0.1.0"
+version = "0.3.0"
 description = ""
 authors = [
     {name = "Katrin Torsunova",email = "to.katrin.t@gmail.com"}
@@ -17,7 +17,9 @@ dependencies = [
     "python-multipart (>=0.0.32,<0.0.33)",
     "sqlalchemy (>=2.0.0,<3.0.0)",
     "alembic (>=1.18.4,<2.0.0)",
-    "pytest (>=9.1.1,<10.0.0)"
+    "pytest (>=9.1.1,<10.0.0)",
+    "itsdangerous (>=2.2.0,<3.0.0)",
+    "pydantic-settings (>=2.0.0,<3.0.0)"
 ]
 
 [project.scripts]
