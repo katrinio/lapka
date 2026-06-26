@@ -1,5 +1,5 @@
 let terminalCommands = [];
-let activeSuggestionIndex = 0;
+const terminalAutocompleteState = createAutocompleteState();
 
 async function loadTerminalCommands() {
   const response = await fetch("/terminal/commands");
@@ -48,7 +48,7 @@ function renderSuggestions(matches) {
   container.hidden = false;
   container.innerHTML = matches
     .map((item, index) => {
-      const activeClass = index === activeSuggestionIndex ? " is-active" : "";
+      const activeClass = index === terminalAutocompleteState.activeIndex ? " is-active" : "";
 
       return `
         <div class="terminal-suggestion${activeClass}" data-command="${item.command}">
@@ -94,7 +94,7 @@ function updateSuggestions() {
     return;
   }
 
-  activeSuggestionIndex = 0;
+  terminalAutocompleteState.activeIndex = 0;
   renderSuggestions(getMatchingCommands(input.value));
 }
 
@@ -108,42 +108,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   input.addEventListener("input", updateSuggestions);
   input.addEventListener("keydown", (event) => {
     const matches = getCurrentMatches();
-
-    if (event.key === "Escape") {
-      event.preventDefault();
-      renderSuggestions([]);
-      return;
-    }
-
-    if (!matches.length) {
-      return;
-    }
-
-    if (event.key === "ArrowDown") {
-      event.preventDefault();
-      activeSuggestionIndex = (activeSuggestionIndex + 1) % matches.length;
-      renderSuggestions(matches);
-      return;
-    }
-
-    if (event.key === "ArrowUp") {
-      event.preventDefault();
-      activeSuggestionIndex =
-        (activeSuggestionIndex - 1 + matches.length) % matches.length;
-      renderSuggestions(matches);
-      return;
-    }
-
-    if (event.key === "Tab" || event.key === "Enter") {
-      event.preventDefault();
-
-      const selectedMatch = matches[activeSuggestionIndex];
-      if (!selectedMatch) {
-        return;
-      }
-
-      applySuggestion(selectedMatch.command);
-    }
+    handleAutocompleteKeydown(event, matches, terminalAutocompleteState, {
+      applySuggestion: (selectedMatch) => applySuggestion(selectedMatch.command),
+      renderSuggestions,
+      hidePopup: () => renderSuggestions([]),
+    });
   });
 
   try {
