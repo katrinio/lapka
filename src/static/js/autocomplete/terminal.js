@@ -97,15 +97,16 @@ function updateSuggestions() {
   terminalAutocompleteState.activeIndex = 0;
   renderSuggestions(getMatchingCommands(input.value));
 }
-
 document.addEventListener("DOMContentLoaded", async () => {
   const input = getTerminalInput();
+  const container = getSuggestionsContainer();
 
-  if (!input) {
+  if (!input || !container) {
     return;
   }
 
   input.addEventListener("input", updateSuggestions);
+
   input.addEventListener("keydown", (event) => {
     const matches = getCurrentMatches();
     handleAutocompleteKeydown(event, matches, terminalAutocompleteState, {
@@ -113,6 +114,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       renderSuggestions,
       hidePopup: () => renderSuggestions([]),
     });
+  });
+
+  container.addEventListener("pointerdown", (event) => {
+    const suggestion = event.target.closest(".terminal-suggestion");
+
+    if (!suggestion) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const command = suggestion.dataset.command;
+
+    if (!command) {
+      return;
+    }
+
+    applySuggestion(command);
   });
 
   try {
