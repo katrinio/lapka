@@ -85,6 +85,24 @@ function handleAutocompleteKeydown(event, matches, state, options) {
   return false;
 }
 
+function handleAutocompletePointerDown(event, options) {
+  const { container, getSuggestionElement, applySuggestion } = options;
+
+  if (!container) {
+    return false;
+  }
+
+  const suggestion = getSuggestionElement(event.target);
+
+  if (!suggestion) {
+    return false;
+  }
+
+  event.preventDefault();
+  applySuggestion(suggestion, event);
+  return true;
+}
+
 window.createAutocompleteState = createAutocompleteState;
 window.normalizeAutocompleteIndex = normalizeAutocompleteIndex;
 window.getActiveAutocompleteItem = getActiveAutocompleteItem;
@@ -92,3 +110,4 @@ window.moveAutocompleteIndex = moveAutocompleteIndex;
 window.showAutocompletePopup = showAutocompletePopup;
 window.hideAutocompletePopup = hideAutocompletePopup;
 window.handleAutocompleteKeydown = handleAutocompleteKeydown;
+window.handleAutocompletePointerDown = handleAutocompletePointerDown;

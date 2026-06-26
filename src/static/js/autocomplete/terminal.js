@@ -117,21 +117,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   container.addEventListener("pointerdown", (event) => {
-    const suggestion = event.target.closest(".terminal-suggestion");
+    handleAutocompletePointerDown(event, {
+      container,
+      getSuggestionElement: (target) => target.closest(".terminal-suggestion"),
+      applySuggestion: (suggestion) => {
+        const command = suggestion.dataset.command;
 
-    if (!suggestion) {
-      return;
-    }
+        if (!command) {
+          return;
+        }
 
-    event.preventDefault();
-
-    const command = suggestion.dataset.command;
-
-    if (!command) {
-      return;
-    }
-
-    applySuggestion(command);
+        applySuggestion(command);
+      },
+    });
   });
 
   try {
