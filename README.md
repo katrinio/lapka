@@ -7,11 +7,9 @@ running...
 
 ---
 
-A small personal log of things worth remembering.   
-Not a diary.  
-Not a task tracker.  
-Not a second brain.  
-Just milestones.
+echo_  
+is a quiet journal for the moments that stay with you. Not every day needs to become an entry.   
+Life doesn’t need a log of everything. Just milestones.
 
 ---
 
@@ -21,50 +19,35 @@ Just milestones.
 </p>
 
 ---
-## Why
+## Why 
 
-Most projects collect tasks.  
-This one collects moments.  
-A release.  
-A move.  
-A decision.  
-A strange idea at 2 a.m.  
-Something that would make it into a New Year's recap.
-
-Everything is intentionally small, simple and fast.
+The best part isn’t writing things down.  
+It’s looking back and seeing how everything fits together.
 
 ---
 ## Terminal
 
-Everything can be done from the terminal.
+Most things start from the terminal.
 
 <p align="center">
   <img src="docs/screenshots/help.png" width="500"/>
 </p>
 
 
-The terminal is a navigation layer, not a shell.
-It opens existing pages and keeps navigation fast.
+It is not a shell.  
+Just enough CLI to get around.
 
 ---
 
 ## Tech
-
-- FastAPI
-- Jinja2
-- SQLAlchemy
-- Pydantic
-- SQLite
-- Alembic
-- Vanilla JavaScript
+`FastAPI` · `Jinja2` · `SQLAlchemy` · `Pydantic` · `SQLite` · `Alembic` · `Vanilla JS`
 
 ## Principles
-- No frontend build step.  
-- No SPA.  
-- No JavaScript framework.  
-- Keyboard-first interface.  
-- Minimal client-side JavaScript.
-
+- Server-rendered HTML
+- Keyboard-first
+- No frontend framework
+- Minimal JavaScript
+- 
 ---
 
 For setup, see [Development Guide](docs/development.md)
