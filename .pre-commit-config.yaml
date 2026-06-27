@@ -52,3 +52,10 @@ repos:
         language: system
         files: ^(src/static/js/.*\.js|tests/js/.*\.test\.js)$
         pass_filenames: false
+
+      - id: alembic-check
+        name: Alembic check
+        entry: poetry run alembic -c src/orm/alembic.ini check
+        language: system
+        files: ^src/orm/.*\.py$
+        pass_filenames: false
