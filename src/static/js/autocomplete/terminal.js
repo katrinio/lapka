@@ -1,5 +1,6 @@
 let terminalCommands = [];
 const terminalAutocompleteState = createAutocompleteState();
+const terminalHistoryState = createHistoryState();
 
 async function loadTerminalCommands() {
   const response = await fetch("/terminal/commands");
@@ -106,11 +107,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  input.addEventListener("input", updateSuggestions);
+  input.addEventListener("input", () => {
+    resetHistoryCursor(terminalHistoryState);
+    updateSuggestions();
+  });
 
   input.addEventListener("keydown", (event) => {
-    // Клавиши навигации по подсказкам обрабатываются здесь, а не глобально.
     const matches = getCurrentMatches();
+    const suggestionsVisible = !container.hidden && matches.length > 0;
+
+    // Когда подсказки видны — автокомплит управляет стрелками.
+    // Когда подсказок нет — стрелки переключают историю команд.
+    if (!suggestionsVisible && (event.key === "ArrowUp" || event.key === "ArrowDown")) {
+      event.preventDefault();
+      const direction = event.key === "ArrowUp" ? "up" : "down";
+      const value = navigateHistory(terminalHistoryState, direction);
+      if (value !== null) {
+        input.value = value;
+      }
+      return;
+    }
+
     handleAutocompleteKeydown(event, matches, terminalAutocompleteState, {
       applySuggestion: (selectedMatch) => applySuggestion(selectedMatch.command),
       renderSuggestions,
