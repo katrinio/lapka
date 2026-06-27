@@ -31,6 +31,16 @@ function moveSelection(direction) {
   renderSelection(rows);
 }
 
+function clearSelection() {
+  if (selectedIndex === -1) {
+    return;
+  }
+
+  const rows = getRows();
+  selectedIndex = -1;
+  renderSelection(rows);
+}
+
 function openSelectedRow() {
   const rows = getRows();
   const row = rows[selectedIndex];
@@ -55,5 +65,9 @@ document.addEventListener("keydown", (event) => {
 
   if (event.key === "Enter") {
     openSelectedRow();
+  }
+
+  if (event.key === "Escape") {
+    clearSelection();
   }
 });

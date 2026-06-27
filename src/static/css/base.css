@@ -76,3 +76,8 @@ a:active {
   color: var(--accent);
   margin-bottom: 28px;
 }
+
+/* ===== Keyboard selection ===== */
+[data-keyboard-row].is-selected {
+  color: var(--selected);
+}

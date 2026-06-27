@@ -33,13 +33,13 @@
   color: var(--accent);
 }
 
-.tree-item.is-selected {
+[data-keyboard-row].is-selected {
   color: var(--selected);
 }
 
-.tree-item.is-selected .tree-branch,
-.tree-item.is-selected .slug {
-  color: inherit;
+[data-keyboard-row].is-selected .tree-branch,
+[data-keyboard-row].is-selected .slug {
+  color: var(--selected);
 }
 
 .tree-branch {
