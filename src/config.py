@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     database_url: str = f"sqlite:///{_ROOT / 'echo.db'}"
     session_secret_key: str = ""
     echo_password: str = ""
+    echo_username: str = "katrin"
 
     @property
     def is_production(self) -> bool:

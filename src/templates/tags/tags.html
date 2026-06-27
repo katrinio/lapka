@@ -3,7 +3,7 @@
 {% block content %}
     <a class="back" href="/">← Back</a>
     <header>
-        <div class="prompt">katrin@echo_:~$ tags</div>
+        <div class="prompt">{{ settings.echo_username }}@echo_:~$ tags</div>
     </header>
     <section class="terminal-table" data-terminal-table>
         {% for tag, count in tags %}

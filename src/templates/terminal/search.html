@@ -3,7 +3,7 @@
 {% block content %}
     <a class="back" href="/">← Back</a>
     <header>
-        <div class="prompt">katrin@echo_:~$ search {{ query }}</div>
+        <div class="prompt">{{ settings.echo_username }}@echo_:~$ search {{ query }}</div>
     </header>
     {% if not query %}
         <p class="muted">Enter a search query.</p>
