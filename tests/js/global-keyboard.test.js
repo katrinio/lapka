@@ -67,4 +67,13 @@ describe("Escape shortcut", () => {
     press("Escape");
     expect(container.hidden).toBe(true);
   });
+
+  it("Escape вне терминала только закрывает подсказки, не снимает фокус", async () => {
+    await setup();
+    const container = document.getElementById("terminal-suggestions");
+    container.hidden = false;
+    // Нажатие вне терминала
+    press("Escape", document.body);
+    expect(container.hidden).toBe(true);
+  });
 });

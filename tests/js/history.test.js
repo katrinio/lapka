@@ -102,3 +102,11 @@ describe("navigateHistory", () => {
     expect(navigateHistory(state, "up")).toBeNull();
   });
 });
+
+describe("saveToHistory — повреждённый localStorage", () => {
+  it("не падает при невалидном JSON в localStorage", () => {
+    localStorage.setItem("echo_terminal_history", "not-json{{{");
+    // loadHistory должен вернуть [] и не бросить
+    expect(() => saveToHistory("help")).not.toThrow();
+  });
+});

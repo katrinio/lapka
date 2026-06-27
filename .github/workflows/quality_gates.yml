@@ -110,8 +110,8 @@ jobs:
         run: env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry install --no-interaction
 
       - name: Run migrations
-        run: env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run alembic upgrade head
+        run: env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run alembic -c src/orm/alembic.ini upgrade head
 
       - name: Check no pending migrations
         run: |
-          env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run alembic check
+          env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run alembic -c src/orm/alembic.ini check

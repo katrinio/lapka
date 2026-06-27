@@ -115,3 +115,42 @@ describe("handleAutocompleteKeydown", () => {
     expect(handlers.renderSuggestions).toHaveBeenCalledWith(MATCHES);
   });
 });
+
+describe("handleAutocompletePointerDown", () => {
+  it("возвращает false если нет container", () => {
+    const result = window.handleAutocompletePointerDown(
+      { target: document.body },
+      { container: null, getSuggestionElement: vi.fn(), applySuggestion: vi.fn() },
+    );
+    expect(result).toBe(false);
+  });
+
+  it("возвращает false если клик не по подсказке", () => {
+    const container = document.createElement("div");
+    const result = window.handleAutocompletePointerDown(
+      { target: document.body },
+      {
+        container,
+        getSuggestionElement: () => null,
+        applySuggestion: vi.fn(),
+      },
+    );
+    expect(result).toBe(false);
+  });
+
+  it("вызывает applySuggestion и возвращает true при клике по подсказке", () => {
+    const container = document.createElement("div");
+    const suggestion = document.createElement("div");
+    const applySuggestion = vi.fn();
+    const event = { target: suggestion, preventDefault: vi.fn() };
+
+    const result = window.handleAutocompletePointerDown(event, {
+      container,
+      getSuggestionElement: () => suggestion,
+      applySuggestion,
+    });
+
+    expect(applySuggestion).toHaveBeenCalledWith(suggestion, event);
+    expect(result).toBe(true);
+  });
+});

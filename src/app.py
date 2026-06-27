@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -12,17 +13,19 @@ from src.features.auth.middleware import AuthMiddleware
 
 SRC = Path(__file__).parent
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    import src.orm.milestone  # noqa: F401
+    import src.orm.tag  # noqa: F401
+    Base.metadata.create_all(engine)
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 app.add_middleware(AuthMiddleware)
 app.include_router(auth_router)
 app.mount("/static", StaticFiles(directory=SRC / "static"), name="static")
 app.include_router(milestones_router)
 app.include_router(terminal_router)
 app.include_router(tags_router)
-
-
-@app.on_event("startup")
-def on_startup() -> None:
-    import src.orm.milestone  # noqa: F401
-    import src.orm.tag  # noqa: F401
-    Base.metadata.create_all(engine)
