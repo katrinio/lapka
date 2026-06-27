@@ -76,7 +76,7 @@ jobs:
         run: env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run pytest
 
   js-tests:
-    name: 🧪 JS units
+    name: 🟨 JS Tests
     runs-on: ubuntu-latest
 
     steps:
