@@ -7,7 +7,7 @@
     </header>
     {% if not query %}
         <p class="muted">Enter a search query.</p>
-        {% elif results %}
+    {% elif results %}
         <div class="prompt">{{ results|length }} milestones found</div>
         <section class="terminal-table" data-terminal-table>
             {% for milestone in results %}

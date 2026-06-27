@@ -14,7 +14,6 @@ htmlcov
 
 *.db
 echo.db
-echo_dev.db
 
 .env
 .env.*

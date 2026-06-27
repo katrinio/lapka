@@ -24,7 +24,6 @@ dependencies = [
 
 [project.scripts]
 echo-run = "src.runner:run"
-echo-dev = "src.runner:run_dev"
 
 
 [build-system]

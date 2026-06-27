@@ -225,3 +225,4 @@ __marimo__/
 /user_notes/BACKLOG.md
 *.db
 /user_notes/
+/scripts/seed_echo.py
