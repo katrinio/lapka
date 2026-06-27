@@ -32,6 +32,9 @@ Seed local data:
 poetry run python scripts/seed_echo.py
 ```
 
+Run this from the project root. If you are already inside `docs/`, the path is
+`../scripts/seed_echo.py`.
+
 If the database already has tables and you need to align Alembic with the current schema:
 
 ```bash

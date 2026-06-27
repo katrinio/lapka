@@ -8,7 +8,7 @@ _ROOT = Path(__file__).parent.parent
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=_ROOT / ".env",
         env_file_encoding="utf-8",
         extra="ignore",
     )
