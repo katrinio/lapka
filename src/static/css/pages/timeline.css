@@ -33,6 +33,14 @@
   color: var(--accent);
 }
 
+.tree-branch {
+  color: var(--muted);
+}
+
+.slug {
+  color: var(--text);
+}
+
 [data-keyboard-row].is-selected {
   color: var(--selected);
 }
@@ -40,12 +48,4 @@
 [data-keyboard-row].is-selected .tree-branch,
 [data-keyboard-row].is-selected .slug {
   color: var(--selected);
-}
-
-.tree-branch {
-  color: var(--muted);
-}
-
-.slug {
-  color: var(--text);
 }

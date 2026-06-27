@@ -12,21 +12,6 @@
   text-decoration: none;
 }
 
-.terminal-table-row.is-selected {
-  color: var(--selected);
-}
-
-.terminal-table-row.is-selected .terminal-table-dots {
-  color: var(--selected);
-  opacity: 0.75;
-}
-
-[data-keyboard-row].is-selected .terminal-table-label,
-[data-keyboard-row].is-selected .terminal-table-dots,
-[data-keyboard-row].is-selected .terminal-table-value {
-  color: inherit;
-}
-
 .terminal-table-label {
   white-space: nowrap;
   color: inherit;
@@ -44,5 +29,20 @@
 .terminal-table-value {
   min-width: 3ch;
   text-align: right;
+  color: inherit;
+}
+
+.terminal-table-row.is-selected {
+  color: var(--selected);
+}
+
+.terminal-table-row.is-selected .terminal-table-dots {
+  color: var(--selected);
+  opacity: 0.75;
+}
+
+[data-keyboard-row].is-selected .terminal-table-label,
+[data-keyboard-row].is-selected .terminal-table-dots,
+[data-keyboard-row].is-selected .terminal-table-value {
   color: inherit;
 }

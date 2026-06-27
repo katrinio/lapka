@@ -12,7 +12,9 @@
             <div class="day-group">
                 <div class="timeline-date">{{ day }}</div>
                 {% for milestone in milestones %}
-                    <a class="item tree-item" data-keyboard-row href="/milestones/{{ milestone.slug }}">
+                    <a class="item tree-item"
+                       data-keyboard-row
+                       href="/milestones/{{ milestone.slug }}">
                         <span class="tree-branch">
                             {% if loop.last %}
                                 └─
