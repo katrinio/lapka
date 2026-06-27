@@ -33,6 +33,15 @@
   color: var(--accent);
 }
 
+.tree-item.is-selected {
+  color: #9ac68f;
+}
+
+.tree-item.is-selected .tree-branch,
+.tree-item.is-selected .slug {
+  color: inherit;
+}
+
 .tree-branch {
   color: var(--muted);
 }

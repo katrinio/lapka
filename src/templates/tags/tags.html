@@ -9,7 +9,8 @@
         {% for tag, count in tags %}
             <a class="terminal-table-row"
                href="/tags/{{ tag }}"
-               data-terminal-table-row>
+               data-terminal-table-row
+               data-keyboard-row>
                 <span class="terminal-table-label" data-terminal-label>{{ tag }}</span>
                 <span class="terminal-table-dots" data-terminal-dots></span>
                 <span class="terminal-table-value" data-terminal-value>{{ count }}</span>

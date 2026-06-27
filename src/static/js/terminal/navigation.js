@@ -4,7 +4,7 @@
 let selectedIndex = -1;
 
 function getRows() {
-  return [...document.querySelectorAll("[data-terminal-table-row]")];
+  return [...document.querySelectorAll("[data-keyboard-row]")];
 }
 
 function renderSelection(rows) {

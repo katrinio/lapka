@@ -13,11 +13,12 @@
 }
 
 .terminal-table-row.is-selected {
-    text-decoration: underline;
+  color: #9ac68f;
 }
 
 .terminal-table-label {
   white-space: nowrap;
+  color: inherit;
 }
 
 .terminal-table-dots {
@@ -32,5 +33,5 @@
 .terminal-table-value {
   min-width: 3ch;
   text-align: right;
-  color: var(--text);
+  color: inherit;
 }
