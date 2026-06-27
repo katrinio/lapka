@@ -12,6 +12,10 @@
   text-decoration: none;
 }
 
+.terminal-table-row.is-selected {
+    text-decoration: underline;
+}
+
 .terminal-table-label {
   white-space: nowrap;
 }
