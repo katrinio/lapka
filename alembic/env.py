@@ -6,6 +6,8 @@ from pathlib import Path
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
+from src.config import settings
+
 CONFIG = context.config
 
 if CONFIG.config_file_name is not None:
@@ -23,7 +25,7 @@ import src.orm.tag  # noqa: F401, E402
 target_metadata = Base.metadata
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    CONFIG.get_main_option("sqlalchemy.url"),
+    settings.database_url or CONFIG.get_main_option("sqlalchemy.url"),
 )
 
 CONFIG.set_main_option("sqlalchemy.url", DATABASE_URL)
