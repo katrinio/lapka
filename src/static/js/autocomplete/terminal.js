@@ -95,7 +95,7 @@ function updateSuggestions() {
     return;
   }
 
-  terminalAutocompleteState.activeIndex = 0;
+  terminalAutocompleteState.activeIndex = -1;
   renderSuggestions(getMatchingCommands(input.value));
 }
 document.addEventListener("DOMContentLoaded", async () => {
