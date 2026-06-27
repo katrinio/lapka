@@ -33,6 +33,8 @@ search: (args) => {
 },
 };
 
+window.TERMINAL_COMMAND_HANDLERS = COMMAND_HANDLERS;
+
 if (terminalInput) {
   // Срабатывает по Enter в терминальной строке.
   terminalInput.addEventListener("keydown", async (event) => {

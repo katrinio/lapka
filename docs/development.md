@@ -41,12 +41,32 @@ If the database already has tables and you need to align Alembic with the curren
 poetry run alembic stamp 4f1b2d9c7a11
 ```
 
+### JS dependencies
+
+```bash
+npm install
+```
+
+### JS tests
+
+```bash
+npm run test:js        # run once
+npm run test:js:watch  # watch mode
+```
+
+Tests live in `tests/js/`. They use [Vitest](https://vitest.dev/) with jsdom.
+
 ### Checks
 
 ```bash
+# Python
 poetry run pytest
-poetry run ruff check .
+poetry run ruff check src
 poetry run mypy src
 poetry run djlint src/templates --check
-poetry run stylelint "src/static/css/**/*.css"
+
+# JS
+npm run test:js
+npx stylelint "src/static/css/**/*.css"
+npx eslint "src/static/js/**/*.js"
 ```
