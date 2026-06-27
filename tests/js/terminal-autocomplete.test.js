@@ -147,4 +147,37 @@ describe("ошибка загрузки команд", () => {
     type("h");
     expect(getContainer().hidden).toBe(true);
   });
+
+  it("при исключении fetch список остаётся пустым", async () => {
+    vi.resetModules();
+    document.body.innerHTML = `
+      <input id="terminal-command">
+      <div id="terminal-suggestions" hidden></div>
+    `;
+    global.fetch = vi.fn().mockRejectedValue(new Error("network error"));
+    await import("../../src/static/js/autocomplete/core.js");
+    await import("../../src/static/js/terminal/history.js");
+    await import("../../src/static/js/autocomplete/terminal.js");
+    document.dispatchEvent(new Event("DOMContentLoaded"));
+    await new Promise((resolve) => setTimeout(resolve, 10));
+
+    type("h");
+    expect(getContainer().hidden).toBe(true);
+  });
+});
+
+describe("клик по подсказке без команды", () => {
+  beforeEach(() => setup());
+
+  it("клик по элементу без data-command не падает", () => {
+    type("h");
+    const container = getContainer();
+    // Создаём элемент без data-command и кликаем через контейнер
+    const inner = document.createElement("span");
+    inner.className = "terminal-suggestion";
+    container.appendChild(inner);
+    expect(() =>
+      inner.dispatchEvent(new MouseEvent("pointerdown", { bubbles: true })),
+    ).not.toThrow();
+  });
 });

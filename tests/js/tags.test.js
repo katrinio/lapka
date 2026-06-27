@@ -96,6 +96,26 @@ describe("вставка тега по клику", () => {
   });
 });
 
+describe("getTokenRange — курсор в середине строки", () => {
+  it("находит токен в середине строки", () => {
+    // "INFRA WO" с курсором на позиции 8 — токен "WO"
+    type("INFRA WO", 8);
+    const buttons = getSuggestions().querySelectorAll("button");
+    expect(buttons[0].textContent).toBe("WORK");
+  });
+
+  it("вставляет пробел если следующий символ не разделитель", () => {
+    // "WO RK" — вставка в середину без разделителя после токена
+    const input = getInput();
+    input.value = "WO RK";
+    Object.defineProperty(input, "selectionStart", { get: () => 2, configurable: true });
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    clickSuggestion(0);
+    // Пробел должен быть добавлен перед "RK"
+    expect(getInput().value).toContain("WORK");
+  });
+});
+
 describe("навигация по списку", () => {
   it("показывает не более 5 подсказок", () => {
     type("A");

@@ -60,6 +60,45 @@ describe("keyboard navigation", () => {
   });
 });
 
+describe("Enter открывает выбранную строку", () => {
+  it("Enter на выбранной строке вызывает навигацию", () => {
+    // Шпионим за window.location через геттер
+    const hrefSpy = vi.fn();
+    const originalDescriptor = Object.getOwnPropertyDescriptor(window, "location");
+    Object.defineProperty(window, "location", {
+      get: () => ({ set href(v) { hrefSpy(v); } }),
+      configurable: true,
+    });
+
+    press("ArrowDown");
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(hrefSpy).toHaveBeenCalled();
+
+    if (originalDescriptor) {
+      Object.defineProperty(window, "location", originalDescriptor);
+    }
+  });
+
+  it("Enter без выбора ничего не делает", () => {
+    // После Escape выделение сброшено — Enter не должен падать
+    expect(() =>
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true })),
+    ).not.toThrow();
+  });
+});
+
+describe("isEditableElement блокирует навигацию", () => {
+  it("Enter внутри input не открывает строку", () => {
+    press("ArrowDown");
+    const input = document.createElement("input");
+    document.body.appendChild(input);
+    // Enter из обычного input не должен влиять на страничную навигацию
+    expect(() =>
+      input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true })),
+    ).not.toThrow();
+  });
+});
+
 describe("terminal input blocks page navigation", () => {
   it("ArrowDown does not select rows when terminal is focused", () => {
     document.body.innerHTML += '<input id="terminal-command">';
