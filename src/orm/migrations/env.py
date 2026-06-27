@@ -13,7 +13,8 @@ CONFIG = context.config
 if CONFIG.config_file_name is not None:
     fileConfig(CONFIG.config_file_name)
 
-ROOT = Path(__file__).resolve().parents[1]
+# env.py живёт в src/orm/migrations/ — корень проекта на 3 уровня выше
+ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 

@@ -23,7 +23,7 @@ in the environment only when you need to override that behavior.
 Apply migrations:
 
 ```bash
-poetry run alembic upgrade head
+poetry run alembic -c src/orm/alembic.ini upgrade head
 ```
 
 Seed local data:
@@ -38,7 +38,7 @@ Run this from the project root. If you are already inside `docs/`, the path is
 If the database already has tables and you need to align Alembic with the current schema:
 
 ```bash
-poetry run alembic stamp 4f1b2d9c7a11
+poetry run alembic -c src/orm/alembic.ini stamp 4f1b2d9c7a11
 ```
 
 ### JS dependencies

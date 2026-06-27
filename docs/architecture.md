@@ -172,7 +172,7 @@ DTO в `features/milestones/dto.py`:
 | `4f1b2d9c7a11` | Добавление tags и milestone_tags    |
 
 ```bash
-poetry run alembic upgrade head
+poetry run alembic -c src/orm/alembic.ini upgrade head
 ```
 
 ## Запуск
@@ -184,7 +184,7 @@ poetry run echo-run
 Таблицы создаются автоматически при первом запуске через `on_startup`. После — проставить ревизию:
 
 ```bash
-poetry run alembic stamp 4f1b2d9c7a11
+poetry run alembic -c src/orm/alembic.ini stamp 4f1b2d9c7a11
 ```
 
 ## Качество кода
