@@ -22,7 +22,7 @@ const COMMAND_HANDLERS = {
 
     return `Тег "${tagName}" не найден.`;
   },
-  search: (args) => {
+search: (args) => {
   const query = args.trim();
 
   if (!query) {

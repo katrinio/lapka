@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}search{% endblock %}
+{% block content %}
+    <a class="back" href="/">← Back</a>
+    <header>
+        <div class="prompt">katrin@echo_:~$ search {{ query }}</div>
+    </header>
+    {% if not query %}
+        <p class="muted">Enter a search query.</p>
+        {% elif results %}
+        <div class="prompt">{{ results|length }} milestones found</div>
+        <section class="terminal-table" data-terminal-table>
+            {% for milestone in results %}
+                <a class="terminal-table-row"
+                   data-terminal-table-row
+                   href="/milestones/{{ milestone.slug }}">
+                    <span class="terminal-table-label" data-terminal-label>{{ milestone.title }}</span>
+                    <span class="terminal-table-dots" data-terminal-dots></span>
+                    <span class="terminal-table-value" data-terminal-value>{{ milestone.happened_at }}</span>
+                </a>
+            {% endfor %}
+        </section>
+    {% else %}
+        <p class="muted">No matches.</p>
+    {% endif %}
+{% endblock %}

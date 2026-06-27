@@ -1,9 +1,8 @@
-from __future__ import annotations
 
 from datetime import UTC, date, datetime
 from typing import TYPE_CHECKING, Sequence
 
-from sqlalchemy import Date, DateTime, String, select
+from sqlalchemy import Date, DateTime, String, select, or_
 from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
 from sqlalchemy.sql.functions import func
 
@@ -91,6 +90,26 @@ class Milestone(Base):
     def get_random(cls) -> Milestone | None:
         with Session(engine) as session:
             return session.execute(select(cls).order_by(func.random())).scalars().first()
+
+    @classmethod
+    def search(cls, query: str) -> Sequence[Milestone]:
+        query = query.strip()
+
+        if not query:
+            return []
+
+        pattern = f"%{query}%"
+
+        with Session(engine) as session:
+            return (
+                session.execute(
+                    select(cls)
+                    .where(or_(cls.title.ilike(pattern), cls.description.ilike(pattern)))
+                    .order_by(cls.happened_at.desc())
+                )
+                .scalars()
+                .all()
+            )
 
     @classmethod
     def update_by_slug(
