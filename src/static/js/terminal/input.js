@@ -22,6 +22,15 @@ const COMMAND_HANDLERS = {
 
     return `Тег "${tagName}" не найден.`;
   },
+  search: (args) => {
+  const query = args.trim();
+
+  if (!query) {
+    return "Введите поисковый запрос.";
+  }
+
+  return `/search?q=${encodeURIComponent(query)}`;
+},
 };
 
 if (terminalInput) {
@@ -55,4 +64,5 @@ if (terminalInput) {
       window.alert(result);
     }
   });
+
 }

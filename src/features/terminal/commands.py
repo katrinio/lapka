@@ -45,4 +45,10 @@ COMMANDS = [
         description="Random milestone",
         example="random",
     ),
+    CommandHelp(
+        name="search",
+        description="Search by title or description",
+        example="search BREST",
+        command="search",
+    ),
 ]
