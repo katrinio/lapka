@@ -74,7 +74,7 @@ src/
     terminal-table.js       — универсальный форматтер терминальных таблиц
 
   main.py           — точка входа, реэкспортирует app
-  runner.py         — команды запуска `echo-run` и `echo-dev`
+  runner.py         — команда запуска `echo-run`
   sitecustomize.py   — настройка import path
 
 tests/

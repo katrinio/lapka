@@ -3,7 +3,7 @@
 {% block content %}
     <a class="back" href="/">← Back</a>
     <header>
-        <div class="prompt">katrin@echo_:~$ tag {{ tag.name }}</div>
+        <div class="prompt">{{ settings.echo_username }}@echo_:~$ tag {{ tag.name }}</div>
         <h1>[{{ tag.name }}]</h1>
     </header>
     <section class="list">

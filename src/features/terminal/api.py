@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Query
 from fastapi.responses import PlainTextResponse, RedirectResponse
 from fastapi.responses import JSONResponse
+
 from src.features.terminal.commands import COMMANDS
 from src.orm.milestone import Milestone
 from src.web.templates import templates
@@ -36,3 +37,17 @@ def random_page():
     if milestone is None:
         return PlainTextResponse("No milestones found.")
     return RedirectResponse(url=f"/milestones/{milestone.slug}", status_code=303)
+
+@router.get("/search")
+def search_page(request: Request, q: str = Query(default="")):
+    query = q.strip()
+    results = Milestone.search(query)
+
+    return templates.TemplateResponse(
+        request,
+        "terminal/search.html",
+        {
+            "query": query,
+            "results": results,
+        },
+    )

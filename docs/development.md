@@ -15,14 +15,8 @@ poetry run echo-run
 Open the app at `http://127.0.0.1:8000`.
 The app reads `.env` automatically through `pydantic-settings`.
 
-### Run in dev mode
-
-```bash
-poetry run echo-dev
-```
-
-This starts the app with `sqlite:///echo_dev.db`.
-This is the preferred local development entrypoint.
+The local database defaults to `echo.db` in the project root. Set `DATABASE_URL`
+in the environment only when you need to override that behavior.
 
 ### Database
 
@@ -31,6 +25,15 @@ Apply migrations:
 ```bash
 poetry run alembic upgrade head
 ```
+
+Seed local data:
+
+```bash
+poetry run python scripts/seed_echo.py
+```
+
+Run this from the project root. If you are already inside `docs/`, the path is
+`../scripts/seed_echo.py`.
 
 If the database already has tables and you need to align Alembic with the current schema:
 

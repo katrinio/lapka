@@ -8,7 +8,7 @@ _ROOT = Path(__file__).parent.parent
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=_ROOT / ".env",
         env_file_encoding="utf-8",
         extra="ignore",
     )
@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     database_url: str = f"sqlite:///{_ROOT / 'echo.db'}"
     session_secret_key: str = ""
     echo_password: str = ""
+    echo_username: str = "katrin"
 
     @property
     def is_production(self) -> bool:

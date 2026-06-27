@@ -2,7 +2,7 @@
 {% block title %}login{% endblock %}
 {% block content %}
     <header>
-        <div class="prompt">katrin@echo_:~$ login</div>
+        <div class="prompt">{{ settings.echo_username }}@echo_:~$ login</div>
     </header>
     <form class="login-form" method="post">
         <input type="hidden" name="next" value="{{ next|default("/") }}">
