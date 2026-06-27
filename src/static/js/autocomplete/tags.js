@@ -32,6 +32,7 @@ function normalizeSpacing(value, insertedEnd) {
 }
 
 if (input && suggestions) {
+  // Список тегов берём из data-атрибута, чтобы не держать его в коде руками.
   const tags = (input.dataset.tags || "")
     .split(",")
     .map((tag) => tag.trim())
@@ -39,6 +40,7 @@ if (input && suggestions) {
 
   // Перерисовывает список подсказок под текущим курсором.
   function renderSuggestions() {
+    // Определяем токен под курсором и показываем только подходящие теги.
     const value = input.value;
     const cursor = input.selectionStart ?? value.length;
     const [start, end] = getTokenRange(value, cursor);

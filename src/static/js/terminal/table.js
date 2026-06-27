@@ -73,6 +73,7 @@ function formatTable(table) {
     const labelRect = label.getBoundingClientRect();
     const valueRect = value.getBoundingClientRect();
     const gapPx = Math.max(0, valueRect.left - labelRect.right - gapAllowance);
+    // Заполняем строку точками только по реальному промежутку между ячейками.
     const rowDots = Math.max(0, Math.floor(gapPx / dotWidth));
 
     dots.textContent = ".".repeat(rowDots);
@@ -83,6 +84,7 @@ function formatTable(table) {
 function initTerminalTables() {
   const tables = document.querySelectorAll("[data-terminal-table]");
   tables.forEach((table) => {
+    // Пересчёт нужен после рендера и при изменении ширины окна.
     const reformat = () => formatTable(table);
     requestAnimationFrame(reformat);
 

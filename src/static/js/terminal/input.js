@@ -53,6 +53,7 @@ if (terminalInput) {
       return;
     }
 
+    // Некоторые команды возвращают URL, другие - текст ошибки/подсказки.
     const result = await handler(args.join(" "));
 
     if (typeof result === "string" && result.startsWith("/")) {

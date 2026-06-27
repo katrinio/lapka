@@ -7,6 +7,7 @@ function getSuggestionsContainer() {
 }
 
 function isEditableElement(target) {
+  // Обычные поля формы не должны перехватывать глобальные хоткеи.
   return (
     target instanceof HTMLInputElement ||
     target instanceof HTMLTextAreaElement ||
@@ -45,6 +46,7 @@ function focusTerminal() {
 document.addEventListener("keydown", (event) => {
   const target = event.target;
 
+  // "/" открывает терминал только вне форм и contenteditable.
   if (event.key === "/") {
     if (isEditableElement(target)) {
       return;
@@ -56,6 +58,7 @@ document.addEventListener("keydown", (event) => {
   }
 
   if (event.key === "Escape") {
+    // Escape закрывает терминальные подсказки и убирает фокус с терминала.
     closeTerminalSuggestions();
 
     if (isTerminalInput(target)) {

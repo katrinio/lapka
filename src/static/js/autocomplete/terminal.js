@@ -46,6 +46,7 @@ function renderSuggestions(matches) {
   }
 
   container.hidden = false;
+  // Рисуем не только текст команд, но и короткое описание справа.
   container.innerHTML = matches
     .map((item, index) => {
       const activeClass = index === terminalAutocompleteState.activeIndex ? " is-active" : "";
@@ -108,6 +109,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   input.addEventListener("input", updateSuggestions);
 
   input.addEventListener("keydown", (event) => {
+    // Клавиши навигации по подсказкам обрабатываются здесь, а не глобально.
     const matches = getCurrentMatches();
     handleAutocompleteKeydown(event, matches, terminalAutocompleteState, {
       applySuggestion: (selectedMatch) => applySuggestion(selectedMatch.command),

@@ -4,7 +4,21 @@
 let selectedIndex = -1;
 
 function getRows() {
+  // Навигация работает по любым кликабельным строкам с общим атрибутом.
   return [...document.querySelectorAll("[data-keyboard-row]")];
+}
+
+function isEditableElement(target) {
+  return (
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    target instanceof HTMLSelectElement ||
+    target?.isContentEditable
+  );
+}
+
+function isTerminalInput(target) {
+  return target instanceof HTMLInputElement && target.id === "terminal-command";
 }
 
 function renderSelection(rows) {
@@ -21,6 +35,7 @@ function moveSelection(direction) {
   }
 
   if (selectedIndex === -1) {
+    // Первая стрелка выбирает край списка в зависимости от направления.
     selectedIndex = direction === "down" ? 0 : rows.length - 1;
   } else if (direction === "down") {
     selectedIndex = Math.min(selectedIndex + 1, rows.length - 1);
@@ -53,6 +68,7 @@ function openSelectedRow() {
 }
 
 document.addEventListener("keydown", (event) => {
+  // Глобальная навигация не должна мешать редактированию текста.
   if (event.key === "ArrowDown") {
     event.preventDefault();
     moveSelection("down");
@@ -64,6 +80,10 @@ document.addEventListener("keydown", (event) => {
   }
 
   if (event.key === "Enter") {
+    if (isEditableElement(event.target) || isTerminalInput(event.target)) {
+      return;
+    }
+
     openSelectedRow();
   }
 
