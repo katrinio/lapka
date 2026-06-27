@@ -1,4 +1,5 @@
 function createAutocompleteState() {
+  // Хранит текущий индекс выбранной подсказки.
   return {
     activeIndex: 0,
   };
@@ -46,6 +47,7 @@ function hideAutocompletePopup(container) {
 function handleAutocompleteKeydown(event, matches, state, options) {
   const { applySuggestion, renderSuggestions, hidePopup } = options;
 
+  // Escape всегда закрывает список подсказок.
   if (event.key === "Escape") {
     event.preventDefault();
     hidePopup();
@@ -92,6 +94,7 @@ function handleAutocompletePointerDown(event, options) {
     return false;
   }
 
+  // Клик по самой подсказке должен вести себя как выбор элемента.
   const suggestion = getSuggestionElement(event.target);
 
   if (!suggestion) {
