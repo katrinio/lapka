@@ -21,6 +21,30 @@ class TestAuthMiddleware:
         assert response.status_code == 303
         assert "/login" in response.headers["location"]
 
+    def test_search_redirects_to_login_without_cookie(self, client):
+        client.cookies.clear()
+        response = client.get("/search?q=test", follow_redirects=False)
+        assert response.status_code == 303
+        assert "/login" in response.headers["location"]
+
+    def test_detail_redirects_to_login_without_cookie(self, client):
+        client.cookies.clear()
+        response = client.get("/milestones/some-slug", follow_redirects=False)
+        assert response.status_code == 303
+        assert "/login" in response.headers["location"]
+
+    def test_create_redirects_to_login_without_cookie(self, client):
+        client.cookies.clear()
+        response = client.post("/new", data={}, follow_redirects=False)
+        assert response.status_code == 303
+        assert "/login" in response.headers["location"]
+
+    def test_edit_redirects_to_login_without_cookie(self, client):
+        client.cookies.clear()
+        response = client.post("/milestones/some-slug/edit", data={}, follow_redirects=False)
+        assert response.status_code == 303
+        assert "/login" in response.headers["location"]
+
     def test_redirect_contains_next_param(self, client):
         client.cookies.clear()
         response = client.get("/milestones/some-slug", follow_redirects=False)
@@ -35,3 +59,15 @@ class TestAuthMiddleware:
         response = client.get("/", follow_redirects=False)
         assert response.status_code == 303
         client.cookies.clear()
+
+
+class TestSmokeCoverage:
+    def test_login_page_responds(self, client):
+        response = client.get("/login", follow_redirects=False)
+        assert response.status_code == 200
+
+    def test_root_redirects_without_auth(self, client):
+        client.cookies.clear()
+        response = client.get("/", follow_redirects=False)
+        assert response.status_code == 303
+        assert "/login" in response.headers["location"]
